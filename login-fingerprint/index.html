@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login · Fingerprint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <button type="button" class="sensor" id="sensor" aria-label="Hold to scan fingerprint">
+      <svg class="print" viewBox="0 0 100 120" aria-hidden="true">
+        <path d="M50 20c-18 0-30 14-30 32v10" fill="none" stroke="currentColor" stroke-width="3" />
+        <path d="M50 12c-24 0-40 18-40 40v20" fill="none" stroke="currentColor" stroke-width="3" />
+        <path d="M35 95c0-20 6-35 15-35s15 15 15 35" fill="none" stroke="currentColor" stroke-width="3" />
+        <path d="M25 98c0-28 10-48 25-48s25 20 25 48" fill="none" stroke="currentColor" stroke-width="3" />
+        <path d="M50 55c-8 0-14 8-14 22" fill="none" stroke="currentColor" stroke-width="3" />
+        <path d="M50 48c-14 0-24 12-24 34" fill="none" stroke="currentColor" stroke-width="3" />
+      </svg>
+      <span class="scan-line" id="scanLine"></span>
+      <span class="sensor-label" id="sensorLabel">Hold to scan</span>
+    </button>
+
+    <form class="login-form" id="loginForm" data-ready="false">
+      <h1>Biometric Gate</h1>
+      <label>
+        <span>Username</span>
+        <input type="text" name="username" required autocomplete="username" placeholder="agent" />
+      </label>
+      <label>
+        <span>Backup PIN</span>
+        <input type="password" name="password" required autocomplete="current-password" placeholder="••••" />
+      </label>
+      <button type="submit">Confirm Identity</button>
+    </form>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
