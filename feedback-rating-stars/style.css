@@ -1,0 +1,207 @@
+:root {
+  --night: #0b1020;
+  --star: #f0c14a;
+  --star-dim: #3a4060;
+  --panel: rgba(18, 22, 40, 0.88);
+  --text: #e8ecf8;
+  --muted: #8a90a8;
+  --accent: #6a8cff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(ellipse at 50% 0%, #1a2040 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, #152030 0%, transparent 35%),
+    var(--night);
+  font-family: "Work Sans", sans-serif;
+  color: var(--text);
+  padding: 24px;
+  overflow: hidden;
+}
+
+.sky {
+  position: relative;
+  width: min(400px, 100%);
+  z-index: 1;
+}
+
+.meteors {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.meteor {
+  position: absolute;
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #fff8e0, var(--star));
+  border-radius: 2px;
+  opacity: 0;
+  transform: rotate(-35deg);
+  animation: streak 0.7s ease-out forwards;
+  box-shadow: 0 0 8px var(--star);
+}
+
+@keyframes streak {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(-35deg) scaleX(0.3);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(180px, 120px) rotate(-35deg) scaleX(1);
+  }
+}
+
+.feedback {
+  position: relative;
+  z-index: 1;
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  backdrop-filter: blur(8px);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.feedback h1 {
+  font-family: "Syne", sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.lede {
+  text-align: center;
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.stars {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.star {
+  border: none;
+  background: none;
+  font-size: 36px;
+  color: var(--star-dim);
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease, text-shadow 0.2s ease;
+  line-height: 1;
+}
+
+.star:hover,
+.star.lit {
+  color: var(--star);
+  text-shadow: 0 0 12px rgba(240, 193, 74, 0.7);
+  transform: scale(1.12);
+}
+
+.star:active {
+  transform: scale(0.95);
+}
+
+.rating-label {
+  text-align: center;
+  font-size: 13px;
+  color: var(--star);
+  min-height: 18px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.feedback label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.feedback input,
+.feedback textarea {
+  padding: 10px 12px;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 15px;
+  resize: vertical;
+}
+
+.feedback input:focus,
+.feedback textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.feedback button[type="submit"] {
+  margin-top: 6px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #0b1020;
+  font-family: "Syne", sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: filter 0.2s ease, opacity 0.2s ease;
+}
+
+.feedback button[type="submit"]:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.feedback button[type="submit"]:not(:disabled):hover {
+  filter: brightness(1.08);
+}
+
+.hint {
+  margin-top: 18px;
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}

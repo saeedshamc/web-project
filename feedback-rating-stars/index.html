@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feedback · Rating Stars</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="sky">
+    <div class="meteors" id="meteors" aria-hidden="true"></div>
+
+    <form class="feedback" id="feedbackForm">
+      <h1>How was it?</h1>
+      <p class="lede">Light up the sky — then leave a note.</p>
+
+      <div class="stars" id="stars" role="radiogroup" aria-label="Rating">
+        <button type="button" class="star" data-value="1" aria-label="1 star">★</button>
+        <button type="button" class="star" data-value="2" aria-label="2 stars">★</button>
+        <button type="button" class="star" data-value="3" aria-label="3 stars">★</button>
+        <button type="button" class="star" data-value="4" aria-label="4 stars">★</button>
+        <button type="button" class="star" data-value="5" aria-label="5 stars">★</button>
+      </div>
+      <p class="rating-label" id="ratingLabel">Tap a star</p>
+
+      <label>
+        <span>Your name</span>
+        <input type="text" name="name" required placeholder="Optional traveler" />
+      </label>
+      <label>
+        <span>Feedback</span>
+        <textarea name="message" rows="3" required placeholder="What stood out?"></textarea>
+      </label>
+      <button type="submit" id="submitBtn" disabled>Send Feedback</button>
+    </form>
+
+    <p class="hint" id="hint">Each star streaks across the night like a meteor.</p>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
