@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact · Mailbox</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="yard">
+    <div class="mailbox" id="mailbox" data-flag="down" data-open="false">
+      <div class="post"></div>
+      <div class="box">
+        <div class="door" id="door"></div>
+        <div class="flag" id="flag"></div>
+        <span class="slot-label">MAIL</span>
+      </div>
+    </div>
+
+    <form class="letter" id="contactForm">
+      <h1>Drop us a letter</h1>
+      <label>
+        <span>From</span>
+        <input type="text" name="name" required placeholder="Your name" />
+      </label>
+      <label>
+        <span>Reply-to</span>
+        <input type="email" name="email" required placeholder="you@example.com" />
+      </label>
+      <label>
+        <span>Letter</span>
+        <textarea name="message" rows="4" required placeholder="Dear team…"></textarea>
+      </label>
+      <button type="submit">Post Letter</button>
+    </form>
+
+    <p class="hint" id="hint">Write your letter, then post it into the mailbox.</p>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
