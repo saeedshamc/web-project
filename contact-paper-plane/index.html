@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact · Paper Plane</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,700&family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="sky">
+    <div class="plane" id="plane" aria-hidden="true">
+      <svg viewBox="0 0 64 64" width="64" height="64">
+        <path d="M4 30 L60 8 L36 56 L28 36 Z" fill="#f4f0e8" />
+        <path d="M28 36 L60 8 L40 34 Z" fill="#d8d0c4" />
+      </svg>
+    </div>
+
+    <form class="contact-form" id="contactForm">
+      <h1>Send a Note</h1>
+      <p class="lede">Fold your message into a paper plane.</p>
+      <label>
+        <span>Your name</span>
+        <input type="text" name="name" required placeholder="Alex" />
+      </label>
+      <label>
+        <span>Email</span>
+        <input type="email" name="email" required placeholder="alex@example.com" />
+      </label>
+      <label>
+        <span>Message</span>
+        <textarea name="message" rows="4" required placeholder="Hello from afar…"></textarea>
+      </label>
+      <button type="submit">Launch Plane</button>
+    </form>
+
+    <p class="hint" id="hint">Fill the form and launch — watch the plane soar away.</p>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
