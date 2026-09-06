@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact · Map Pin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="world">
+    <div class="map" id="map" role="img" aria-label="Stylized city map">
+      <div class="roads"></div>
+      <div class="blocks"></div>
+      <button type="button" class="pin" id="pin" aria-label="Drop map pin" style="--x: 52%; --y: 42%;">
+        <span class="pin-head"></span>
+        <span class="pin-shadow"></span>
+      </button>
+    </div>
+
+    <form class="contact-form" id="contactForm" data-open="false">
+      <h1>Meet us here</h1>
+      <p class="lede">Pin dropped · tell us how to reach you.</p>
+      <label>
+        <span>Name</span>
+        <input type="text" name="name" required placeholder="Your name" />
+      </label>
+      <label>
+        <span>Email</span>
+        <input type="email" name="email" required placeholder="you@example.com" />
+      </label>
+      <label>
+        <span>Message</span>
+        <textarea name="message" rows="3" required placeholder="Where should we meet?"></textarea>
+      </label>
+      <button type="submit">Send Coordinates</button>
+    </form>
+
+    <p class="hint" id="hint">Click the map to drop a pin and open the contact form.</p>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

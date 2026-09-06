@@ -1,0 +1,215 @@
+:root {
+  --map: #1e3a4c;
+  --road: #2f5a6e;
+  --block: #264858;
+  --pin: #e85d4c;
+  --paper: #f2f6f8;
+  --ink: #143040;
+  --accent: #2a8f7a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 20% 80%, #0f2834 0%, transparent 40%),
+    linear-gradient(160deg, #0c1c26, #132b38);
+  font-family: "Outfit", sans-serif;
+  color: var(--ink);
+  padding: 24px;
+}
+
+.world {
+  width: min(420px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.map {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.35 / 1;
+  background: var(--map);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: crosshair;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+  animation: map-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes map-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.roads {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent 18%, var(--road) 18%, var(--road) 22%, transparent 22%),
+    linear-gradient(90deg, transparent 58%, var(--road) 58%, var(--road) 61%, transparent 61%),
+    linear-gradient(0deg, transparent 30%, var(--road) 30%, var(--road) 34%, transparent 34%),
+    linear-gradient(0deg, transparent 70%, var(--road) 70%, var(--road) 73%, transparent 73%);
+  opacity: 0.85;
+}
+
+.blocks {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(var(--block), var(--block)) 8% 12% / 22% 14% no-repeat,
+    linear-gradient(var(--block), var(--block)) 70% 18% / 18% 20% no-repeat,
+    linear-gradient(var(--block), var(--block)) 28% 55% / 26% 16% no-repeat,
+    linear-gradient(var(--block), var(--block)) 72% 62% / 20% 18% no-repeat;
+  opacity: 0.7;
+}
+
+.pin {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  transform: translate(-50%, -100%);
+  background: none;
+  border: none;
+  width: 28px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pin.dropped {
+  opacity: 1;
+  animation: pin-drop 0.45s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+}
+
+@keyframes pin-drop {
+  from {
+    transform: translate(-50%, -220%) scale(0.6);
+  }
+  to {
+    transform: translate(-50%, -100%) scale(1);
+  }
+}
+
+.pin-head {
+  display: block;
+  width: 22px;
+  height: 22px;
+  margin: 0 auto;
+  background: var(--pin);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+}
+
+.pin-shadow {
+  display: block;
+  width: 14px;
+  height: 4px;
+  margin: 10px auto 0;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 50%;
+  filter: blur(1px);
+}
+
+.contact-form {
+  width: 100%;
+  background: var(--paper);
+  padding: 22px;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: max-height 0.5s ease, opacity 0.4s ease, padding 0.4s ease;
+}
+
+.contact-form[data-open="true"] {
+  max-height: 480px;
+  opacity: 1;
+  padding: 22px;
+}
+
+.contact-form h1 {
+  font-size: 24px;
+  text-align: center;
+}
+
+.lede {
+  text-align: center;
+  font-size: 13px;
+  color: #4a6878;
+  margin-bottom: 4px;
+}
+
+.contact-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #3a5868;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 10px 12px;
+  border: 1.5px solid #c8d8e0;
+  border-radius: 8px;
+  background: #fff;
+  font-family: inherit;
+  font-size: 15px;
+  resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.contact-form button {
+  margin-top: 4px;
+  padding: 11px;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #f2fffb;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.contact-form button:hover {
+  filter: brightness(1.06);
+}
+
+.hint {
+  font-size: 13px;
+  color: #8aadb8;
+  text-align: center;
+}
