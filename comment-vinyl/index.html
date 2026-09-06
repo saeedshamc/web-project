@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comment · Vinyl</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="deck">
+    <div class="vinyl" id="vinyl" data-spin="false">
+      <div class="label" id="labelText">A1</div>
+    </div>
+    <form id="commentForm">
+      <h1>B-Side Comments</h1>
+      <label>
+        <span>Artist</span>
+        <input type="text" id="name" required maxlength="24" />
+      </label>
+      <label>
+        <span>Liner note</span>
+        <textarea id="comment" rows="3" required maxlength="160"></textarea>
+      </label>
+      <button type="submit">Drop the Needle</button>
+    </form>
+    <ul class="tracks" id="tracks"></ul>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

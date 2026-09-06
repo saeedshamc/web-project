@@ -1,0 +1,130 @@
+:root {
+  --bg: #1a1210;
+  --vinyl: #111;
+  --label: #e84a3a;
+  --text: #f0e8e0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(ellipse at 50% 20%, #2a1c18 0%, var(--bg) 60%);
+  font-family: "IBM Plex Sans", sans-serif;
+  color: var(--text);
+  padding: 24px;
+}
+
+.deck {
+  width: min(400px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.vinyl {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, #2a2a2a 18%, transparent 19%),
+    repeating-radial-gradient(circle at 50% 50%, #0a0a0a 0 2px, #1a1a1a 2px 4px);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+.vinyl[data-spin="true"] { animation: spin 1.4s linear infinite; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.label {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--label);
+  display: grid;
+  place-items: center;
+  font-family: "Anton", sans-serif;
+  font-size: 14px;
+  color: #fff;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #241a16;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+h1 {
+  font-family: "Anton", sans-serif;
+  font-size: 24px;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #a89080;
+}
+
+input, textarea {
+  padding: 9px 10px;
+  border: 1px solid #3a2e28;
+  border-radius: 6px;
+  background: #120e0c;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+}
+
+input:focus, textarea:focus { outline: none; border-color: var(--label); }
+
+button {
+  padding: 11px;
+  border: none;
+  border-radius: 6px;
+  background: var(--label);
+  color: #fff;
+  font-family: "Anton", sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+}
+
+.tracks {
+  width: 100%;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tracks li {
+  background: #241a16;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  animation: in 0.35s ease both;
+  border-left: 3px solid var(--label);
+}
+
+@keyframes in {
+  from { opacity: 0; transform: translateX(-8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.tracks .who { display: block; font-size: 11px; color: #a89080; margin-top: 4px; }
