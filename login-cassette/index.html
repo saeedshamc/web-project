@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login · Cassette</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="deck">
+    <div class="cassette" id="cassette" data-playing="false">
+      <div class="label">
+        <span class="side">SIDE A</span>
+        <h1>ACCESS MIX</h1>
+        <p class="track" id="trackText">Insert credentials to play</p>
+      </div>
+      <div class="reels">
+        <div class="reel left" id="reelL"></div>
+        <div class="reel right" id="reelR"></div>
+      </div>
+      <div class="window"></div>
+    </div>
+
+    <form id="loginForm">
+      <label>
+        <span>Artist / User</span>
+        <input type="text" name="username" required autocomplete="username" placeholder="your name" />
+      </label>
+      <label>
+        <span>Track code</span>
+        <input type="password" name="password" required autocomplete="current-password" placeholder="••••••••" />
+      </label>
+      <button type="submit">▶ Play & Log in</button>
+    </form>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
