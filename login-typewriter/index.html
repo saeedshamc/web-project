@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login · Typewriter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="desk">
+    <div class="paper-sheet" aria-hidden="true"></div>
+
+    <div class="typewriter" role="img" aria-label="Vintage typewriter">
+      <div class="carriage">
+        <div class="platen"></div>
+        <div class="paper" id="typedPaper">
+          <span class="cursor">|</span>
+        </div>
+      </div>
+
+      <div class="body-shell">
+        <h1 class="brand">CLICK · CLACK</h1>
+        <form class="login-form" id="loginForm" autocomplete="on">
+          <label>
+            <span>Username</span>
+            <input type="text" name="username" id="username" placeholder="type your name…" autocomplete="username" required />
+          </label>
+          <label>
+            <span>Password</span>
+            <input type="password" name="password" id="password" placeholder="••••••••" autocomplete="current-password" required />
+          </label>
+          <button type="submit">Strike Return</button>
+        </form>
+
+        <div class="keys" id="keys" aria-hidden="true">
+          <span data-key="Q">Q</span><span data-key="W">W</span><span data-key="E">E</span><span data-key="R">R</span>
+          <span data-key="A">A</span><span data-key="S">S</span><span data-key="D">D</span><span data-key="F">F</span>
+          <span data-key="Z">Z</span><span data-key="X">X</span><span data-key="C">C</span><span data-key="V">V</span>
+          <span class="space" data-key=" ">SPACE</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="hint">Type in the fields — watch the keys strike and letters appear on the paper.</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
