@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feedback · Mood Dial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="booth">
+    <div class="dial-wrap">
+      <div class="face" id="face">😐</div>
+      <input type="range" id="mood" min="0" max="4" value="2" />
+      <p class="mood-label" id="moodLabel">Okay</p>
+    </div>
+    <form id="feedbackForm">
+      <h1>Mood Meter</h1>
+      <textarea name="message" rows="3" required placeholder="What shaped your mood?"></textarea>
+      <button type="submit">Send Mood</button>
+    </form>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
