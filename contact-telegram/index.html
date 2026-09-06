@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact · Telegram</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="office">
+    <form class="telegram" id="contactForm">
+      <header>
+        <span class="logo">⚡ WESTERN UNION</span>
+        <span class="class">CABLEGRAM</span>
+      </header>
+      <div class="fields">
+        <label>TO <input type="text" name="to" required placeholder="RECIPIENT" /></label>
+        <label>FROM <input type="text" name="name" required placeholder="YOUR NAME" /></label>
+        <label>REPLY <input type="email" name="email" required placeholder="email@wire.com" /></label>
+        <label class="msg">MESSAGE
+          <textarea name="message" rows="5" required placeholder="STOP. SEND HELP. STOP."></textarea>
+        </label>
+      </div>
+      <div class="strip" id="strip" aria-live="polite"></div>
+      <button type="submit">Transmit Wire</button>
+    </form>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
