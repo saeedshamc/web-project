@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login Form Lamp</title>
+  <link rel="stylesheet" href="style59.css" />
+</head>
+<body data-on="false">
+
+<div class="container">
+  <div class="lamp-wrapper">
+    <svg class="lamp-svg" viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
+      <ellipse class="inner-glow" cx="100" cy="90" rx="55" ry="45" />
+
+      <path class="lamp-shade" d="M40,115 A60,70 0 0 1 160,115 Z" />
+
+      <rect class="lamp-pole" x="94" y="115" width="12" height="125" rx="4" />
+
+      <rect class="lamp-base" x="55" y="240" width="90" height="16" rx="8" />
+
+      <g class="pull-cord">
+        <line class="cord-line" x1="120" y1="118" x2="120" y2="185" />
+        <circle class="cord-bead" cx="120" cy="195" r="8" />
+        <circle class="cord-hit" cx="120" cy="195" r="25" fill="transparent" />
+      </g>
+    </svg>
+  </div>
+
+  <form class="login-form">
+    <h1>Welcome back</h1>
+    <label>
+      <span>Username</span>
+      <input type="text" name="username" placeholder="Enter your username" autocomplete="username" />
+    </label>
+    <label>
+      <span>Password</span>
+      <input type="password" name="password" placeholder="Enter your password" autocomplete="current-password" />
+    </label>
+    <button type="submit">Log in</button>
+    <p class="hint">Click or pull the cord to turn on the light ✨</p>
+  </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Draggable.min.js"></script>
+<script src="script59.js"></script>
+</body>
+</html>
