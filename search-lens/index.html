@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search · Lens</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="field">
+    <form class="search" id="searchForm">
+      <div class="lens" id="lens" aria-hidden="true"></div>
+      <input type="search" id="q" name="q" required placeholder="What are you looking for?" autocomplete="off" />
+      <button type="submit">Search</button>
+    </form>
+    <ul class="results" id="results" aria-live="polite"></ul>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

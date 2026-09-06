@@ -1,0 +1,128 @@
+:root {
+  --bg: #0e1620;
+  --glass: rgba(255, 255, 255, 0.06);
+  --accent: #5ad4c8;
+  --text: #e8eef4;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(ellipse at 50% 30%, #1a2838 0%, transparent 50%),
+    var(--bg);
+  font-family: "Instrument Sans", sans-serif;
+  color: var(--text);
+  padding: 24px;
+}
+
+.field {
+  width: min(440px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.search {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  background: var(--glass);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  padding: 8px 8px 8px 14px;
+  backdrop-filter: blur(8px);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search.focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 28px rgba(90, 212, 200, 0.15);
+}
+
+.lens {
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--accent);
+  border-radius: 50%;
+  position: relative;
+  opacity: 0.7;
+  transition: transform 0.35s ease;
+}
+
+.lens::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 3px;
+  background: var(--accent);
+  bottom: -4px;
+  right: -6px;
+  transform: rotate(45deg);
+  border-radius: 2px;
+}
+
+.search.searching .lens {
+  animation: sweep 0.8s ease infinite;
+}
+
+@keyframes sweep {
+  0%, 100% { transform: rotate(-12deg) scale(1); }
+  50% { transform: rotate(12deg) scale(1.08); }
+}
+
+input {
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 16px;
+  padding: 8px 0;
+  min-width: 0;
+}
+
+input:focus { outline: none; }
+
+button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #042420;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.results {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.results li {
+  padding: 12px 16px;
+  background: var(--glass);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  animation: in 0.35s ease both;
+  font-size: 14px;
+}
+
+@keyframes in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.results .tag {
+  display: inline-block;
+  font-size: 11px;
+  color: var(--accent);
+  margin-right: 8px;
+  font-weight: 600;
+}
