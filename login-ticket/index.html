@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login · Ticket</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="lobby">
+    <div class="ticket" id="ticket" data-torn="false">
+      <div class="stub">
+        <p class="admit">ADMIT ONE</p>
+        <p class="seat">ROW · GATE</p>
+      </div>
+      <div class="perforation" id="tear" role="button" tabindex="0" aria-label="Tear ticket stub"></div>
+      <div class="main-pass">
+        <p class=" fest">MIDNIGHT ACCESS</p>
+        <h1>MEMBER TICKET</h1>
+        <form id="loginForm">
+          <label>
+            <span>Guest name</span>
+            <input type="text" name="username" required autocomplete="username" />
+          </label>
+          <label>
+            <span>Code</span>
+            <input type="password" name="password" required autocomplete="current-password" />
+          </label>
+          <button type="submit">Validate Ticket</button>
+        </form>
+      </div>
+    </div>
+    <p class="hint">Tear the stub along the dots to unlock the gate.</p>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
