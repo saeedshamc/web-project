@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login · Piano</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="stage">
+    <h1>Key Signature</h1>
+    <p class="lede">Type — white keys light with every letter.</p>
+    <div class="piano" id="piano" aria-hidden="true">
+      <span class="key white" data-n="0"></span>
+      <span class="key black" data-n="1"></span>
+      <span class="key white" data-n="2"></span>
+      <span class="key black" data-n="3"></span>
+      <span class="key white" data-n="4"></span>
+      <span class="key white" data-n="5"></span>
+      <span class="key black" data-n="6"></span>
+      <span class="key white" data-n="7"></span>
+      <span class="key black" data-n="8"></span>
+      <span class="key white" data-n="9"></span>
+      <span class="key black" data-n="10"></span>
+      <span class="key white" data-n="11"></span>
+      <span class="key white" data-n="12"></span>
+    </div>
+    <form id="loginForm">
+      <label>
+        <span>Name</span>
+        <input type="text" id="username" name="username" required autocomplete="username" />
+      </label>
+      <label>
+        <span>Passphrase</span>
+        <input type="password" id="password" name="password" required autocomplete="current-password" />
+      </label>
+      <button type="submit">Enter the Hall</button>
+    </form>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
