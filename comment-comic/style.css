@@ -1,0 +1,115 @@
+:root {
+  --ink: #1a1a1a;
+  --yellow: #ffe14a;
+  --cyan: #4ad4ff;
+  --pink: #ff6b9a;
+  --bg: #f4f0e8;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.03) 3px, rgba(0,0,0,0.03) 4px),
+    var(--bg);
+  font-family: "Comic Neue", cursive;
+  color: var(--ink);
+  padding: 28px 20px;
+}
+
+.page {
+  max-width: 520px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+h1 {
+  font-family: "Bangers", cursive;
+  font-size: 42px;
+  letter-spacing: 0.06em;
+  text-align: center;
+  text-shadow: 3px 3px 0 var(--yellow);
+}
+
+.panels {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 80px;
+}
+
+.bubble {
+  position: relative;
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 18px;
+  padding: 14px 16px;
+  font-size: 16px;
+  font-weight: 700;
+  animation: pop 0.4s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+  max-width: 90%;
+}
+
+.bubble:nth-child(odd) { align-self: flex-start; background: #fffef5; }
+.bubble:nth-child(even) { align-self: flex-end; background: #f0fbff; }
+
+.bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: 24px;
+  border: 8px solid transparent;
+  border-top-color: var(--ink);
+}
+
+.bubble:nth-child(even)::after { left: auto; right: 24px; }
+
+.bubble .who {
+  display: block;
+  font-family: "Bangers", cursive;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: var(--pink);
+  margin-bottom: 4px;
+}
+
+@keyframes pop {
+  from { opacity: 0; transform: scale(0.7); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+form {
+  display: grid;
+  gap: 8px;
+  border: 3px solid var(--ink);
+  background: var(--yellow);
+  padding: 14px;
+  border-radius: 12px;
+}
+
+input, textarea {
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  padding: 10px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  resize: vertical;
+}
+
+button {
+  padding: 12px;
+  border: 3px solid var(--ink);
+  background: var(--pink);
+  color: #fff;
+  font-family: "Bangers", cursive;
+  font-size: 22px;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+button:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
