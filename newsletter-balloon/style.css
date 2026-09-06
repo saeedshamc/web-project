@@ -1,0 +1,123 @@
+:root {
+  --sky: #6a9ec8;
+  --balloon: #e85d4c;
+  --basket: #5a3c28;
+  --paper: #f8f4ee;
+  --ink: #1e3040;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(ellipse at 70% 10%, rgba(255,255,255,0.35) 0%, transparent 40%),
+    linear-gradient(180deg, var(--sky), #c8dce8 60%, #d4e8c0);
+  font-family: "Nunito", sans-serif;
+  color: var(--ink);
+  padding: 24px;
+  overflow: hidden;
+}
+
+.sky {
+  position: relative;
+  width: min(380px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.balloon {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.balloon.up {
+  animation: lift 2s cubic-bezier(0.22, 0.7, 0.35, 1) forwards;
+}
+
+@keyframes lift {
+  0% { opacity: 1; transform: translate(-50%, 80px) scale(0.5); }
+  40% { opacity: 1; transform: translate(-50%, 0) scale(1); }
+  100% { opacity: 0; transform: translate(-30%, -120vh) scale(0.7); }
+}
+
+.envelope {
+  width: 64px;
+  height: 72px;
+  background: radial-gradient(circle at 50% 40%, #ff8a7a, var(--balloon));
+  border-radius: 50% 50% 45% 45%;
+  margin: 0 auto;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.basket {
+  width: 28px;
+  height: 18px;
+  background: var(--basket);
+  margin: 8px auto 0;
+  border-radius: 2px;
+  position: relative;
+}
+
+.basket::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 4px;
+  right: 4px;
+  height: 10px;
+  border-left: 1px solid #3a2818;
+  border-right: 1px solid #3a2818;
+}
+
+form {
+  width: 100%;
+  background: var(--paper);
+  padding: 28px 22px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 14px 36px rgba(40,70,90,0.2);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+form.sent { opacity: 0.4; transform: translateY(8px); }
+
+h1 {
+  font-family: "Fraunces", serif;
+  font-size: 28px;
+  text-align: center;
+}
+
+.lede { text-align: center; font-size: 14px; color: #5a7080; }
+
+input {
+  padding: 12px;
+  border: 1.5px solid #c8d4dc;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 15px;
+}
+
+input:focus { outline: none; border-color: var(--balloon); }
+
+button {
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: var(--balloon);
+  color: #fff8f5;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+}
