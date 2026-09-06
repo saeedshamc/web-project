@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login · Vault</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="scene">
+    <div class="vault" id="vault" data-open="false">
+      <div class="door">
+        <div class="bolt-ring">
+          <div class="dial" id="dial">
+            <span class="notch"></span>
+          </div>
+          <button type="button" class="handle" id="handle" aria-label="Turn vault handle">OPEN</button>
+        </div>
+        <p class="door-label">SECURE ACCESS</p>
+      </div>
+
+      <div class="inner">
+        <form class="login-form" id="loginForm">
+          <h1>Vault Login</h1>
+          <label>
+            <span>Agent ID</span>
+            <input type="text" name="username" placeholder="XV-7741" autocomplete="username" required />
+          </label>
+          <label>
+            <span>Passcode</span>
+            <input type="password" name="password" placeholder="••••••••" autocomplete="current-password" required />
+          </label>
+          <button type="submit">Unlock Contents</button>
+        </form>
+      </div>
+    </div>
+    <p class="hint">Spin the dial, then press the handle to open the vault door.</p>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
