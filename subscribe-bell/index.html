@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Subscribe · Bell</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <button type="button" class="bell" id="bell" aria-label="Ring notification bell">
+      <span class="bell-body">🔔</span>
+      <span class="badge" id="badge" hidden>1</span>
+    </button>
+    <form id="subForm" data-open="false">
+      <h1>Stay in the loop</h1>
+      <input type="email" required placeholder="you@notify.com" />
+      <button type="submit">Enable Alerts</button>
+    </form>
+    <p class="hint">Ring the bell to open the subscribe form.</p>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
