@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signup · Passport</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Inter+Tight:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="stage">
+    <button type="button" class="open-btn" id="openBtn" aria-expanded="false">Open passport</button>
+
+    <div class="passport" id="passport" data-open="false">
+      <div class="cover">
+        <div class="crest">✦</div>
+        <p class="country">REPUBLIC OF ACCESS</p>
+        <h1>PASSPORT</h1>
+      </div>
+
+      <div class="inside">
+        <form class="signup-form" id="signupForm">
+          <p class="mrz-label">Identity page</p>
+          <label>
+            <span>Given names</span>
+            <input type="text" name="firstname" required placeholder="ALEX" />
+          </label>
+          <label>
+            <span>Surname</span>
+            <input type="text" name="lastname" required placeholder="RIVERA" />
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" required placeholder="alex@mail.com" />
+          </label>
+          <label>
+            <span>Password</span>
+            <input type="password" name="password" required placeholder="••••••••" minlength="6" />
+          </label>
+          <button type="submit">Stamp & Issue</button>
+          <p class="mrz" id="mrz" aria-hidden="true">P&lt;ROA&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</p>
+        </form>
+      </div>
+    </div>
+
+    <p class="hint">Open the passport booklet to fill your signup details.</p>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
