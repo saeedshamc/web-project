@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login · Compass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="map">
+    <div class="compass" id="compass">
+      <div class="dial">
+        <span class="mark n">N</span>
+        <span class="mark e">E</span>
+        <span class="mark s">S</span>
+        <span class="mark w">W</span>
+        <div class="needle" id="needle"></div>
+      </div>
+      <button type="button" class="spin-btn" id="spinBtn">Find North</button>
+    </div>
+    <form id="loginForm" data-open="false">
+      <h1>True North Login</h1>
+      <label>
+        <span>Explorer</span>
+        <input type="text" name="username" required autocomplete="username" />
+      </label>
+      <label>
+        <span>Secret bearing</span>
+        <input type="password" name="password" required autocomplete="current-password" />
+      </label>
+      <button type="submit">Set Course</button>
+    </form>
+    <p class="hint">Spin the compass until it locks on north to reveal login.</p>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
