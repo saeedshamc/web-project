@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact · Pigeon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="sky">
+    <div class="pigeon" id="pigeon" aria-hidden="true">🕊️</div>
+    <form id="contactForm">
+      <h1>Carrier Pigeon</h1>
+      <p class="lede">Tie your note to the bird.</p>
+      <label>
+        <span>Your name</span>
+        <input type="text" name="name" required />
+      </label>
+      <label>
+        <span>Email</span>
+        <input type="email" name="email" required />
+      </label>
+      <label>
+        <span>Note</span>
+        <textarea name="message" rows="3" required></textarea>
+      </label>
+      <button type="submit">Release Pigeon</button>
+    </form>
+    <p class="hint" id="hint">Send — the pigeon flies across the sky.</p>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

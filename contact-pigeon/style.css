@@ -1,0 +1,111 @@
+:root {
+  --sky: #7eb8d8;
+  --cloud: #f4f8fc;
+  --ink: #1e3344;
+  --accent: #3a6b8a;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(255, 255, 255, 0.45) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 20%, rgba(255, 255, 255, 0.3) 0%, transparent 35%),
+    linear-gradient(180deg, var(--sky), #c8e0c0);
+  font-family: "Nunito", sans-serif;
+  color: var(--ink);
+  padding: 24px;
+  overflow: hidden;
+}
+
+.sky {
+  position: relative;
+  width: min(400px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.pigeon {
+  position: absolute;
+  font-size: 42px;
+  top: 30%;
+  left: 50%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 5;
+  filter: drop-shadow(0 6px 8px rgba(30, 50, 60, 0.25));
+}
+
+.pigeon.fly {
+  animation: fly 1.8s cubic-bezier(0.22, 0.7, 0.35, 1) forwards;
+}
+
+@keyframes fly {
+  0% { opacity: 1; transform: translate(-50%, 40px) scale(0.6) rotate(-10deg); }
+  40% { opacity: 1; transform: translate(10%, -60px) scale(1) rotate(8deg); }
+  100% { opacity: 0; transform: translate(110vw, -140px) scale(0.8) rotate(15deg); }
+}
+
+form {
+  width: 100%;
+  background: var(--cloud);
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 14px 36px rgba(40, 70, 90, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+form.sent { opacity: 0.4; transform: scale(0.97); }
+
+h1 {
+  font-family: "Fraunces", serif;
+  font-size: 28px;
+  text-align: center;
+}
+
+.lede { text-align: center; font-size: 14px; color: #5a7380; margin-bottom: 4px; }
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #4a6470;
+}
+
+input, textarea {
+  padding: 10px 12px;
+  border: 1.5px solid #c8d8e0;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 15px;
+  resize: vertical;
+}
+
+input:focus, textarea:focus { outline: none; border-color: var(--accent); }
+
+button {
+  margin-top: 4px;
+  padding: 11px;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #f4f8fc;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.hint { font-size: 13px; color: #2a4a58; text-align: center; }
