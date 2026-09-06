@@ -1,0 +1,218 @@
+:root {
+  --pink: #ff2d95;
+  --cyan: #2de2e6;
+  --bg: #07060c;
+  --panel: rgba(18, 12, 28, 0.72);
+  --text: #f5f0ff;
+  --muted: #8a7a9e;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(ellipse at 50% 0%, #1a0a24 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 100%, #0a1820 0%, transparent 40%),
+    var(--bg);
+  font-family: "Rajdhani", sans-serif;
+  color: var(--text);
+  padding: 24px;
+  transition: background 0.6s ease;
+}
+
+body[data-lit="true"] {
+  background:
+    radial-gradient(ellipse at 50% 15%, rgba(255, 45, 149, 0.18) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(45, 226, 230, 0.1) 0%, transparent 45%),
+    var(--bg);
+}
+
+.night {
+  width: min(400px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.power {
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid #3a2a4a;
+  border-radius: 999px;
+  background: #120c18;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.power-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4a3a5a;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+body[data-lit="true"] .power {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+
+body[data-lit="true"] .power-dot {
+  background: var(--cyan);
+  box-shadow: 0 0 10px var(--cyan);
+}
+
+.sign {
+  text-align: center;
+  min-height: 110px;
+}
+
+.neon {
+  font-family: "Monoton", cursive;
+  font-size: clamp(2.2rem, 8vw, 3.2rem);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: #3a2030;
+  transition: color 0.5s ease, text-shadow 0.5s ease, opacity 0.5s ease;
+}
+
+body[data-lit="true"] .neon {
+  color: #fff0f7;
+  text-shadow:
+    0 0 6px var(--pink),
+    0 0 18px var(--pink),
+    0 0 40px rgba(255, 45, 149, 0.7),
+    0 0 80px rgba(255, 45, 149, 0.35);
+  animation: flicker 4s infinite;
+}
+
+.sub-neon {
+  margin-top: 6px;
+  font-size: 14px;
+  letter-spacing: 0.45em;
+  color: #2a3540;
+  transition: color 0.5s ease, text-shadow 0.5s ease;
+}
+
+body[data-lit="true"] .sub-neon {
+  color: #e8ffff;
+  text-shadow:
+    0 0 6px var(--cyan),
+    0 0 16px rgba(45, 226, 230, 0.6);
+}
+
+@keyframes flicker {
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
+    opacity: 1;
+  }
+  20%,
+  24%,
+  55% {
+    opacity: 0.72;
+  }
+}
+
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px;
+  background: var(--panel);
+  border: 1px solid #2a1e38;
+  border-radius: 12px;
+  opacity: 0.28;
+  filter: grayscale(0.8) brightness(0.55);
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 0.55s ease, filter 0.55s ease, transform 0.55s ease, border-color 0.55s ease, box-shadow 0.55s ease;
+}
+
+body[data-lit="true"] .login-form {
+  opacity: 1;
+  filter: none;
+  pointer-events: auto;
+  transform: translateY(0);
+  border-color: rgba(255, 45, 149, 0.35);
+  box-shadow: 0 0 30px rgba(255, 45, 149, 0.12);
+}
+
+.login-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+body[data-lit="true"] .login-form label {
+  color: #c8b8d8;
+}
+
+.login-form input {
+  padding: 11px 12px;
+  border: 1px solid #2a1e38;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 16px;
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: var(--pink);
+  box-shadow: 0 0 12px rgba(255, 45, 149, 0.25);
+}
+
+.login-form button {
+  margin-top: 4px;
+  padding: 12px;
+  border: 1px solid var(--cyan);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--cyan);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-form button:hover {
+  background: rgba(45, 226, 230, 0.12);
+  box-shadow: 0 0 18px rgba(45, 226, 230, 0.25);
+}
+
+.hint {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.4;
+}

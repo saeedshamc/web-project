@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login · Neon Sign</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-lit="false">
+  <div class="night">
+    <button type="button" class="power" id="power" aria-pressed="false" aria-label="Toggle neon power">
+      <span class="power-dot"></span>
+      POWER
+    </button>
+
+    <header class="sign">
+      <h1 class="neon" id="neonTitle">NIGHTSHIFT</h1>
+      <p class="sub-neon">MEMBER ENTRANCE</p>
+    </header>
+
+    <form class="login-form" id="loginForm">
+      <label>
+        <span>Handle</span>
+        <input type="text" name="username" placeholder="your name on the strip" autocomplete="username" required />
+      </label>
+      <label>
+        <span>Code</span>
+        <input type="password" name="password" placeholder="••••••••" autocomplete="current-password" required />
+      </label>
+      <button type="submit">Enter the Club</button>
+    </form>
+
+    <p class="hint">Flip the power switch to light the neon and wake the form.</p>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
