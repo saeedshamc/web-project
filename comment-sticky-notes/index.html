@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comment · Sticky Notes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Karla:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="board-wrap">
+    <h1>Wall of Notes</h1>
+    <p class="lede">Leave a sticky — it peels onto the board.</p>
+
+    <form class="composer" id="commentForm">
+      <label>
+        <span>Name</span>
+        <input type="text" name="name" id="name" required placeholder="You" maxlength="24" />
+      </label>
+      <label>
+        <span>Comment</span>
+        <textarea name="comment" id="comment" rows="3" required placeholder="Write something sticky…" maxlength="160"></textarea>
+      </label>
+      <button type="submit">Stick it</button>
+    </form>
+
+    <div class="board" id="board" aria-live="polite"></div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
