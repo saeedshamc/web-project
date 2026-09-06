@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Newsletter · Bottle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="ocean">
+    <div class="waves" aria-hidden="true"></div>
+
+    <div class="bottle" id="bottle">
+      <div class="cork"></div>
+      <div class="glass">
+        <div class="scroll" id="scrollNote"></div>
+      </div>
+    </div>
+
+    <form class="newsletter" id="newsForm">
+      <h1>Message in a Bottle</h1>
+      <p class="lede">Cast your email into the tide.</p>
+      <label>
+        <span>Email</span>
+        <input type="email" name="email" id="email" required placeholder="you@island.com" />
+      </label>
+      <button type="submit">Set Adrift</button>
+    </form>
+
+    <p class="hint" id="hint">Subscribe and watch your note float away in a bottle.</p>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
