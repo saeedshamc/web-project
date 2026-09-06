@@ -1,0 +1,118 @@
+:root {
+  --film: #1a1a1a;
+  --frame: #e8e0d4;
+  --bg: #0e0c0a;
+  --accent: #f0c14a;
+  --text: #f0e8e0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  font-family: "IBM Plex Sans", sans-serif;
+  color: var(--text);
+  padding: 28px 16px;
+}
+
+.darkroom {
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+h1 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 40px;
+  letter-spacing: 0.08em;
+  text-align: center;
+  color: var(--accent);
+}
+
+.strip {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  background: var(--film);
+  padding: 16px 8px;
+  border-radius: 4px;
+  min-height: 140px;
+  scroll-behavior: smooth;
+}
+
+.frame {
+  flex: 0 0 140px;
+  background: var(--frame);
+  color: #1a1410;
+  margin: 0 4px;
+  padding: 12px 10px;
+  position: relative;
+  animation: develop 0.45s ease both;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.frame::before,
+.frame::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background:
+    radial-gradient(circle, var(--film) 3px, transparent 3.5px) 8px 50% / 16px 100% repeat-x;
+}
+
+.frame::before { top: -12px; }
+.frame::after { bottom: -12px; }
+
+.frame .who {
+  display: block;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: #8b2a1a;
+  margin-bottom: 6px;
+}
+
+@keyframes develop {
+  from { opacity: 0; filter: brightness(2); transform: scale(0.9); }
+  to { opacity: 1; filter: brightness(1); transform: scale(1); }
+}
+
+form {
+  display: grid;
+  gap: 10px;
+  background: #1a1614;
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid #2a2420;
+}
+
+input, textarea {
+  padding: 10px 12px;
+  border: 1px solid #3a342e;
+  border-radius: 6px;
+  background: #0e0c0a;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+}
+
+input:focus, textarea:focus { outline: none; border-color: var(--accent); }
+
+button {
+  padding: 11px;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #1a1408;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
