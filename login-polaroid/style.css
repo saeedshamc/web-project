@@ -1,0 +1,182 @@
+:root {
+  --frame: #f6f3ee;
+  --ink: #2a2420;
+  --accent: #c45c26;
+  --photo: #1c1a18;
+  --bg: #3d4a52;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(ellipse at 30% 20%, #5a6a74 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 90%, #2a3338 0%, transparent 45%),
+    linear-gradient(160deg, #4a5860, var(--bg));
+  font-family: "DM Sans", sans-serif;
+  color: var(--ink);
+  padding: 24px;
+  overflow-x: hidden;
+}
+
+.table {
+  width: min(340px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.hint {
+  font-size: 13px;
+  color: #c8d2d8;
+  text-align: center;
+}
+
+.polaroid {
+  width: 100%;
+  background: var(--frame);
+  padding: 16px 16px 20px;
+  border-radius: 4px;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.35),
+    0 2px 0 rgba(255, 255, 255, 0.5) inset;
+  transform: rotate(-2deg);
+  animation: drop-photo 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --reveal: 0;
+}
+
+@keyframes drop-photo {
+  from {
+    opacity: 0;
+    transform: translateY(-40px) rotate(-8deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(-2deg);
+  }
+}
+
+.photo-area {
+  position: relative;
+  aspect-ratio: 1;
+  background: var(--photo);
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+  margin-bottom: 14px;
+  user-select: none;
+}
+
+.photo-area:active {
+  cursor: grabbing;
+}
+
+.develop {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 220, 180, 0.15), transparent 40%),
+    linear-gradient(135deg, #3a6b7a 0%, #1a3038 40%, #c45c26 100%);
+  clip-path: inset(0 0 calc(100% - var(--reveal) * 1%) 0);
+  transition: filter 0.2s ease;
+  display: grid;
+  place-items: center;
+}
+
+.ghost-text {
+  font-family: "Caveat", cursive;
+  font-size: 28px;
+  color: rgba(255, 255, 255, 0.55);
+  opacity: calc(1 - var(--reveal) / 100);
+}
+
+.pull-tab {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 18px;
+  animation: bounce-tab 1.4s ease-in-out infinite;
+  opacity: calc(1 - var(--reveal) / 80);
+}
+
+@keyframes bounce-tab {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(4px);
+  }
+}
+
+.caption-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.55s ease, opacity 0.4s ease 0.1s;
+}
+
+.polaroid.developed .caption-form {
+  max-height: 280px;
+  opacity: 1;
+}
+
+.caption-form h1 {
+  font-family: "Caveat", cursive;
+  font-size: 28px;
+  text-align: center;
+  color: var(--accent);
+}
+
+.caption-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 12px;
+  color: #6a5e54;
+}
+
+.caption-form input {
+  padding: 9px 10px;
+  border: none;
+  border-bottom: 1.5px dashed #cbb8a8;
+  background: transparent;
+  font-family: "Caveat", cursive;
+  font-size: 20px;
+  color: var(--ink);
+}
+
+.caption-form input:focus {
+  outline: none;
+  border-bottom-color: var(--accent);
+}
+
+.caption-form button {
+  margin-top: 6px;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background: var(--accent);
+  color: #fff8f2;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.caption-form button:hover {
+  filter: brightness(1.08);
+}

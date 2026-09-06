@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login · Polaroid</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="table">
+    <p class="hint top">Drag the photo down to develop the login.</p>
+
+    <div class="polaroid" id="polaroid">
+      <div class="photo-area" id="dragHandle">
+        <div class="develop" id="develop">
+          <span class="ghost-text">pull to develop</span>
+        </div>
+        <div class="pull-tab" aria-hidden="true">▾</div>
+      </div>
+      <form class="caption-form" id="loginForm">
+        <h1>Instant Access</h1>
+        <label>
+          <span>Who's in the frame?</span>
+          <input type="text" name="username" placeholder="your name" autocomplete="username" required />
+        </label>
+        <label>
+          <span>Darkroom code</span>
+          <input type="password" name="password" placeholder="••••••••" autocomplete="current-password" required />
+        </label>
+        <button type="submit">Snap & Sign in</button>
+      </form>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
