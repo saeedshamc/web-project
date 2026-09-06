@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact · Smoke Signal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="mesa">
+    <div class="fire" id="fire" aria-hidden="true">
+      <div class="flame"></div>
+      <div class="smoke s1"></div>
+      <div class="smoke s2"></div>
+      <div class="smoke s3"></div>
+    </div>
+    <form id="contactForm">
+      <h1>Smoke Signals</h1>
+      <p class="lede">Send a puff across the mesa.</p>
+      <input type="text" name="name" required placeholder="Your name" />
+      <input type="email" name="email" required placeholder="Email" />
+      <textarea name="message" rows="3" required placeholder="Message for the hills…"></textarea>
+      <button type="submit">Send Smoke</button>
+    </form>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
