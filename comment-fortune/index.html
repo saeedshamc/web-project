@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comment · Fortune Cookie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="table">
+    <div class="cookie" id="cookie" data-open="false">
+      <div class="shell left"></div>
+      <div class="shell right"></div>
+      <div class="slip" id="slip">Write a fortune below…</div>
+    </div>
+    <form id="commentForm">
+      <h1>Leave a Fortune</h1>
+      <label>
+        <span>Name</span>
+        <input type="text" id="name" required maxlength="20" />
+      </label>
+      <label>
+        <span>Fortune</span>
+        <textarea id="comment" rows="2" required maxlength="100" placeholder="You will build something delightful."></textarea>
+      </label>
+      <button type="submit">Crack Cookie</button>
+    </form>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
