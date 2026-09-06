@@ -1,0 +1,122 @@
+:root {
+  --bg: #0a0e0a;
+  --panel: #0f160f;
+  --green: #3dff6e;
+  --dim: #1f6b35;
+  --chrome: #1a221a;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(ellipse at 50% 0%, #122016 0%, transparent 50%),
+    var(--bg);
+  font-family: "IBM Plex Mono", monospace;
+  color: var(--green);
+  padding: 24px;
+}
+
+.term {
+  width: min(480px, 100%);
+  background: var(--panel);
+  border: 1px solid #1e2e1e;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(61, 255, 110, 0.08), 0 20px 50px rgba(0, 0, 0, 0.5);
+  animation: boot 0.6s ease both;
+}
+
+@keyframes boot {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.chrome {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+  background: var(--chrome);
+  border-bottom: 1px solid #1e2e1e;
+}
+
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+.dot.r { background: #ff5f56; }
+.dot.y { background: #ffbd2e; }
+.dot.g { background: #27c93f; }
+.title { margin-left: 8px; font-size: 11px; color: #6a8a6a; }
+
+.screen {
+  min-height: 120px;
+  padding: 16px;
+  font-size: 13px;
+  line-height: 1.6;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(61, 255, 110, 0.02) 2px,
+    rgba(61, 255, 110, 0.02) 4px
+  );
+}
+
+.line.dim { color: var(--dim); }
+.line.ok { color: #9dffb0; }
+.line.err { color: #ff6b6b; }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 16px 16px;
+  border-top: 1px dashed #1e2e1e;
+  padding-top: 14px;
+}
+
+.form label {
+  display: grid;
+  grid-template-columns: 48px 12px 1fr;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.prompt { color: var(--dim); }
+
+.form input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--dim);
+  color: var(--green);
+  font-family: inherit;
+  font-size: 13px;
+  padding: 6px 0;
+  caret-color: var(--green);
+}
+
+.form input:focus { outline: none; border-bottom-color: var(--green); }
+
+.form button {
+  margin-top: 6px;
+  align-self: flex-start;
+  padding: 8px 14px;
+  border: 1px solid var(--green);
+  background: transparent;
+  color: var(--green);
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.form button:hover { background: rgba(61, 255, 110, 0.12); }
+
+.cursor::after {
+  content: "█";
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink { 50% { opacity: 0; } }
