@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login · Slot Machine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="casino">
+    <div class="machine">
+      <div class="reels" id="reels">
+        <div class="reel" id="r1">🔐</div>
+        <div class="reel" id="r2">🔑</div>
+        <div class="reel" id="r3">⭐</div>
+      </div>
+      <button type="button" class="lever" id="lever" aria-label="Pull lever">▼ PULL</button>
+    </div>
+    <form id="loginForm" data-open="false">
+      <h1>Jackpot Login</h1>
+      <input type="text" name="username" required placeholder="Username" autocomplete="username" />
+      <input type="password" name="password" required placeholder="Password" autocomplete="current-password" />
+      <button type="submit">Cash In</button>
+    </form>
+    <p class="hint" id="hint">Pull the lever — three locks unlock the form.</p>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
