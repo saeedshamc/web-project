@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login · Flip Clock</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Barlow:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="desk">
+    <div class="clock" id="clock" aria-live="polite">
+      <div class="flip"><span id="h1">0</span></div>
+      <div class="flip"><span id="h2">0</span></div>
+      <div class="colon">:</div>
+      <div class="flip"><span id="m1">0</span></div>
+      <div class="flip"><span id="m2">0</span></div>
+    </div>
+    <form id="loginForm">
+      <h1>Shift Login</h1>
+      <p class="lede">Clock flips with every keystroke.</p>
+      <label>
+        <span>Operator</span>
+        <input type="text" id="username" name="username" required autocomplete="username" />
+      </label>
+      <label>
+        <span>Passcode</span>
+        <input type="password" id="password" name="password" required autocomplete="current-password" />
+      </label>
+      <button type="submit">Clock In</button>
+    </form>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
