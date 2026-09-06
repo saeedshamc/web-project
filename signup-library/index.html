@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signup · Library Card</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="desk">
+    <form class="card" id="signupForm">
+      <header>
+        <h1>Public Library</h1>
+        <p>Membership Card</p>
+      </header>
+      <label>Full name<input type="text" name="name" required /></label>
+      <label>Email<input type="email" name="email" required /></label>
+      <label>Password<input type="password" name="password" required minlength="6" /></label>
+      <div class="stamp" id="stamp">DUE</div>
+      <button type="submit">Stamp & Join</button>
+      <p class="id" id="cardId">ID · ———</p>
+    </form>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
