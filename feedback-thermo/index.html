@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feedback · Thermometer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="lab">
+    <div class="thermo" aria-hidden="true">
+      <div class="tube">
+        <div class="mercury" id="mercury"></div>
+      </div>
+      <div class="bulb" id="bulb"></div>
+    </div>
+    <form id="feedbackForm">
+      <h1>Temperature Check</h1>
+      <label class="range-label">
+        <span>How warm was the experience?</span>
+        <input type="range" id="temp" min="0" max="100" value="40" />
+      </label>
+      <p class="reading" id="reading">40° — lukewarm</p>
+      <textarea name="message" rows="3" required placeholder="Tell us more…"></textarea>
+      <button type="submit">Log Reading</button>
+    </form>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
