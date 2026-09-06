@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comment · Chat Bubble</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="phone">
+    <header class="chat-header">
+      <span class="avatar" aria-hidden="true"></span>
+      <div>
+        <h1>Live Comments</h1>
+        <p class="status">typing appears as you write</p>
+      </div>
+    </header>
+
+    <div class="thread" id="thread" aria-live="polite">
+      <div class="bubble them">Hey — drop a thought below.</div>
+    </div>
+
+    <div class="typing" id="typing" hidden>
+      <span></span><span></span><span></span>
+    </div>
+
+    <form class="composer" id="commentForm">
+      <input type="text" name="name" id="name" placeholder="Name" required maxlength="20" />
+      <textarea name="comment" id="comment" rows="2" placeholder="Say something…" required maxlength="200"></textarea>
+      <button type="submit" aria-label="Send">➤</button>
+    </form>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
