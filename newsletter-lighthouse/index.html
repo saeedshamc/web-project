@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Newsletter · Lighthouse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Literata:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-beam="false">
+  <main class="coast">
+    <div class="lighthouse" aria-hidden="true">
+      <div class="beam" id="beam"></div>
+      <div class="tower">
+        <div class="lantern"></div>
+        <div class="body"></div>
+        <div class="base"></div>
+      </div>
+    </div>
+    <form id="newsForm">
+      <h1>Signal the Shore</h1>
+      <p class="lede">Subscribe to catch the beam.</p>
+      <input type="email" required placeholder="sailor@sea.com" />
+      <button type="submit">Light the Beacon</button>
+    </form>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
