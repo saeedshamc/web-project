@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login · Origami</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="stage">
+    <button type="button" class="fold-btn" id="foldBtn" aria-expanded="false">Unfold paper</button>
+
+    <div class="origami" id="origami" data-open="false">
+      <div class="sheet">
+        <div class="flap flap-tl"></div>
+        <div class="flap flap-tr"></div>
+        <div class="flap flap-bl"></div>
+        <div class="flap flap-br"></div>
+        <form class="login-form" id="loginForm">
+          <h1>Paper Pass</h1>
+          <p class="lede">Credentials fold into trust.</p>
+          <label>
+            <span>Name</span>
+            <input type="text" name="username" placeholder="your name" autocomplete="username" required />
+          </label>
+          <label>
+            <span>Secret</span>
+            <input type="password" name="password" placeholder="••••••••" autocomplete="current-password" required />
+          </label>
+          <button type="submit">Fold & Enter</button>
+        </form>
+      </div>
+    </div>
+
+    <p class="hint">Tap “Unfold paper” to open the origami and reveal the login.</p>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
