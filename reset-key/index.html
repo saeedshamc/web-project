@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reset · Key</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="door">
+    <div class="lockplate">
+      <div class="keyhole" id="keyhole" data-turned="false">
+        <div class="key" id="key"></div>
+      </div>
+    </div>
+    <form id="resetForm" data-open="false">
+      <h1>Reset Password</h1>
+      <label>
+        <span>Email</span>
+        <input type="email" name="email" required />
+      </label>
+      <label>
+        <span>New password</span>
+        <input type="password" name="password" required minlength="6" />
+      </label>
+      <button type="submit">Turn Key & Reset</button>
+    </form>
+    <p class="hint">Submit to turn the key in the lock.</p>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

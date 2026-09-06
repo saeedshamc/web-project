@@ -1,0 +1,134 @@
+:root {
+  --brass: #c4a35a;
+  --metal: #3a4048;
+  --bg: #12161c;
+  --panel: #1a2028;
+  --text: #e8eef4;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(ellipse at 50% 20%, #1e2834 0%, var(--bg) 55%);
+  font-family: "DM Sans", sans-serif;
+  color: var(--text);
+  padding: 24px;
+}
+
+.door {
+  width: min(360px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.lockplate {
+  width: 120px;
+  height: 160px;
+  background: linear-gradient(160deg, #4a5058, var(--metal));
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.keyhole {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid var(--brass);
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.key {
+  width: 10px;
+  height: 36px;
+  background: var(--brass);
+  border-radius: 4px;
+  position: relative;
+  transform-origin: 50% 70%;
+  transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+  box-shadow: 0 0 10px rgba(196, 163, 90, 0.4);
+}
+
+.key::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  border: 3px solid var(--brass);
+  border-radius: 50%;
+  background: transparent;
+}
+
+.key::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  right: -6px;
+  width: 10px;
+  height: 8px;
+  background: var(--brass);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 40% 100%, 40% 60%, 0 60%);
+}
+
+.keyhole[data-turned="true"] .key {
+  transform: rotate(90deg);
+}
+
+form {
+  width: 100%;
+  background: var(--panel);
+  padding: 22px;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid #2a3440;
+}
+
+h1 { font-size: 22px; text-align: center; }
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: #8a96a4;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #2a3440;
+  background: #0e1218;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 15px;
+}
+
+input:focus { outline: none; border-color: var(--brass); }
+
+button {
+  padding: 11px;
+  border: none;
+  border-radius: 8px;
+  background: var(--brass);
+  color: #1a1408;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.hint { font-size: 13px; color: #8a96a4; text-align: center; }
