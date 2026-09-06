@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact · Postcard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="table">
+    <button type="button" id="flipBtn" class="flip-btn">Flip postcard</button>
+    <div class="card" id="card" data-flipped="false">
+      <div class="face front">
+        <div class="photo"></div>
+        <p class="caption">Greetings from the studio</p>
+      </div>
+      <div class="face back">
+        <form id="contactForm">
+          <label>
+            <span>From</span>
+            <input type="text" name="name" required />
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" required />
+          </label>
+          <label>
+            <span>Message</span>
+            <textarea name="message" rows="4" required placeholder="Wish you were here…"></textarea>
+          </label>
+          <button type="submit">Mail it</button>
+        </form>
+        <div class="stamp" aria-hidden="true">✉</div>
+      </div>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
