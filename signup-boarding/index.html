@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signup · Boarding Pass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="gate">
+    <form class="pass" id="signupForm">
+      <div class="airline">SKY ACCESS · BOARDING PASS</div>
+      <div class="route">
+        <div><span class="code" id="fromCode">YOU</span><small>ORIGIN</small></div>
+        <div class="plane">✈</div>
+        <div><span class="code">APP</span><small>DESTINATION</small></div>
+      </div>
+      <div class="grid">
+        <label>PASSENGER<input type="text" name="name" id="name" required placeholder="FULL NAME" /></label>
+        <label>EMAIL<input type="email" name="email" required placeholder="you@fly.com" /></label>
+        <label>PASSWORD<input type="password" name="password" required minlength="6" /></label>
+        <label>SEAT<input type="text" name="seat" placeholder="12A" maxlength="3" /></label>
+      </div>
+      <div class="barcode" aria-hidden="true"></div>
+      <button type="submit">Issue Pass</button>
+    </form>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

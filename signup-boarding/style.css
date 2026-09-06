@@ -1,0 +1,120 @@
+:root {
+  --blue: #1a3a6a;
+  --paper: #f4f6f8;
+  --ink: #121820;
+  --accent: #e85d2a;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(160deg, #0e1a2a, #1a2838);
+  font-family: "IBM Plex Mono", monospace;
+  color: var(--ink);
+  padding: 24px;
+}
+
+.gate { width: min(420px, 100%); }
+
+.pass {
+  background: var(--paper);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  animation: slide 0.6s ease both;
+}
+
+@keyframes slide {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.airline {
+  background: var(--blue);
+  color: #e8eef8;
+  padding: 10px 16px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.15em;
+}
+
+.route {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 16px 8px;
+}
+
+.code {
+  display: block;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+small {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: #6a7580;
+}
+
+.plane { font-size: 24px; color: var(--accent); }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 8px 16px 12px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: #6a7580;
+}
+
+label:nth-child(2) { grid-column: span 2; }
+
+input {
+  border: none;
+  border-bottom: 1px solid #c8d0d8;
+  background: transparent;
+  font-family: inherit;
+  font-size: 13px;
+  padding: 6px 0;
+  text-transform: uppercase;
+}
+
+input[type="email"], input[type="password"] { text-transform: none; }
+input:focus { outline: none; border-bottom-color: var(--blue); }
+
+.barcode {
+  height: 36px;
+  margin: 4px 16px;
+  background: repeating-linear-gradient(90deg, #121820 0 2px, transparent 2px 4px, #121820 4px 5px, transparent 5px 8px);
+  opacity: 0.85;
+}
+
+button {
+  width: calc(100% - 32px);
+  margin: 8px 16px 16px;
+  padding: 12px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.pass.issued { outline: 3px dashed var(--accent); outline-offset: -6px; }
