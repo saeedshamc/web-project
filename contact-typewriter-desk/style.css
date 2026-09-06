@@ -1,0 +1,224 @@
+:root {
+  --wood: #5c3d2e;
+  --wood-light: #7a5540;
+  --lamp: #f0d080;
+  --paper: #efe6d4;
+  --ink: #1c1612;
+  --accent: #8b3a2a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(240, 208, 128, 0.15) 0%, transparent 45%),
+    linear-gradient(180deg, #1a1210 0%, #2a1c16 100%);
+  font-family: "Courier Prime", monospace;
+  color: var(--ink);
+  padding: 24px;
+  overflow-x: hidden;
+}
+
+.desk-scene {
+  width: min(420px, 100%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.desk {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(180deg, var(--wood-light), var(--wood));
+  border-radius: 8px 8px 4px 4px;
+  padding: 28px 22px 22px;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  animation: place 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes place {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lamp-glow {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 80px;
+  background: radial-gradient(ellipse, rgba(240, 208, 128, 0.35), transparent 70%);
+  pointer-events: none;
+}
+
+.contact-form {
+  background: var(--paper);
+  padding: 22px;
+  border-radius: 2px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.contact-form.sealed {
+  opacity: 0;
+  transform: scale(0.85) translateY(-20px);
+  pointer-events: none;
+}
+
+.contact-form h1 {
+  font-family: "Libre Baskerville", serif;
+  font-size: 22px;
+  text-align: center;
+}
+
+.lede {
+  text-align: center;
+  font-size: 12px;
+  color: #6a5a4a;
+  margin-bottom: 4px;
+}
+
+.contact-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #5a4a3a;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 8px 10px;
+  border: none;
+  border-bottom: 1px solid #c8b8a0;
+  background: transparent;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-bottom-color: var(--accent);
+}
+
+.status {
+  min-height: 18px;
+  font-size: 12px;
+  color: #6a5a4a;
+  letter-spacing: 0.04em;
+}
+
+.contact-form button {
+  margin-top: 4px;
+  padding: 10px;
+  border: 2px solid var(--ink);
+  background: transparent;
+  font-family: "Libre Baskerville", serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.contact-form button:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.envelope {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  width: 160px;
+  height: 100px;
+  transform: translate(-50%, 0) scale(0);
+  opacity: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.envelope.show {
+  animation: seal-fly 1.4s cubic-bezier(0.22, 0.8, 0.35, 1) forwards;
+}
+
+.body-env {
+  position: absolute;
+  inset: 20px 0 0;
+  background: #e8dcc8;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: #d4c4a8;
+  clip-path: polygon(0 100%, 50% 0, 100% 100%);
+  transform-origin: top center;
+  animation: none;
+}
+
+.envelope.show .flap {
+  animation: flap-close 0.4s 0.2s ease forwards;
+}
+
+@keyframes flap-close {
+  from {
+    transform: rotateX(0deg);
+  }
+  to {
+    transform: rotateX(-180deg);
+  }
+}
+
+@keyframes seal-fly {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, 40px) scale(0.4);
+  }
+  40% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(80vw, -120px) scale(0.7) rotate(12deg);
+  }
+}
+
+.hint {
+  font-size: 12px;
+  color: #a89078;
+  text-align: center;
+  line-height: 1.45;
+  max-width: 340px;
+}

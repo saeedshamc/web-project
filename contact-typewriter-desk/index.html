@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact · Typewriter Desk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="desk-scene">
+    <div class="envelope" id="envelope" aria-hidden="true">
+      <div class="flap"></div>
+      <div class="body-env"></div>
+    </div>
+
+    <section class="desk">
+      <div class="lamp-glow"></div>
+      <form class="contact-form" id="contactForm">
+        <h1>Desk Correspondence</h1>
+        <p class="lede">Typed under the desk lamp.</p>
+        <label>
+          <span>Correspondent</span>
+          <input type="text" name="name" required placeholder="Name" />
+        </label>
+        <label>
+          <span>Address</span>
+          <input type="email" name="email" required placeholder="email@office.com" />
+        </label>
+        <label>
+          <span>Dispatch</span>
+          <textarea name="message" rows="4" required placeholder="Begin typing…" id="message"></textarea>
+        </label>
+        <div class="status" id="status" aria-live="polite"></div>
+        <button type="submit">Seal Envelope</button>
+      </form>
+    </section>
+
+    <p class="hint">Type your message — each keystroke clicks. Submit seals it into an envelope.</p>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
