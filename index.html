@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FORMSTAGE · گالری فرم‌های تعاملی</title>
+  <meta name="description" content="گالری دموهای تعاملی لاگین، تماس، کامنت و فرم‌های خلاقانه با HTML و CSS و JavaScript" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="home.css" />
+</head>
+<body>
+  <div class="atmosphere" aria-hidden="true"></div>
+
+  <header class="hero">
+    <p class="brand">FORMSTAGE</p>
+    <h1>صحنه‌هایی برای فرم</h1>
+    <p class="tagline">۴۳ دموی تعاملی — هر کدام یک ایده بصری جدا، فقط با HTML و CSS و JavaScript.</p>
+    <a class="cta" href="#gallery">ورود به گالری</a>
+  </header>
+
+  <main id="gallery" class="gallery">
+    <div class="toolbar">
+      <h2>گالری دموها</h2>
+      <div class="filters" role="tablist" aria-label="فیلتر دسته‌ها">
+        <button type="button" class="filter is-active" data-filter="all" role="tab" aria-selected="true">همه</button>
+        <button type="button" class="filter" data-filter="login" role="tab" aria-selected="false">لاگین</button>
+        <button type="button" class="filter" data-filter="contact" role="tab" aria-selected="false">تماس</button>
+        <button type="button" class="filter" data-filter="comment" role="tab" aria-selected="false">کامنت</button>
+        <button type="button" class="filter" data-filter="signup" role="tab" aria-selected="false">ثبت‌نام</button>
+        <button type="button" class="filter" data-filter="other" role="tab" aria-selected="false">سایر</button>
+      </div>
+      <p class="count" id="count"></p>
+    </div>
+
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <footer class="footer">
+    <p><span class="brand-inline">FORMSTAGE</span> — هر پوشه را جدا باز کنید یا از همین صفحه وارد شوید.</p>
+  </footer>
+
+  <script src="home.js"></script>
+</body>
+</html>
