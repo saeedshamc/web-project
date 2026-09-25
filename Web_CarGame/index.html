@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>🏎️ بازی ماشین تحت وب</title>
+    <style>
+        body {
+            font-family: 'Tahoma', sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .game-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 100%;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            font-weight: bold;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .score {
+            color: #27ae60;
+        }
+        
+        .speed {
+            color: #e74c3c;
+        }
+        
+        #gameCanvas {
+            border: 3px solid #2c3e50;
+            border-radius: 10px;
+            background: #34495e;
+            margin: 15px 0;
+            display: block;
+            max-width: 100%;
+            width: 100%;
+            height: auto;
+            box-sizing: border-box;
+        }
+        
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin: 15px 0;
+        }
+        
+        .control-row {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+        
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+            min-width: 80px;
+            min-height: 44px;
+            touch-action: manipulation;
+        }
+        
+        button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .gas-btn {
+            background: #27ae60;
+        }
+        
+        .gas-btn:hover {
+            background: #229954;
+        }
+        
+        .brake-btn {
+            background: #e74c3c;
+        }
+        
+        .brake-btn:hover {
+            background: #c0392b;
+        }
+        
+        .lane-btn {
+            background: #f39c12;
+        }
+        
+        .lane-btn:hover {
+            background: #e67e22;
+        }
+        
+        .game-btn {
+            background: #9b59b6;
+            grid-column: 1 / -1;
+            margin-top: 10px;
+        }
+        
+        .game-btn:hover {
+            background: #8e44ad;
+        }
+        
+        .status {
+            font-size: 1.1em;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        
+        .status.running {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status.stopped {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .instructions {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 15px;
+            line-height: 1.4;
+        }
+        
+        .debug {
+            font-size: 0.8em;
+            color: #999;
+            margin-top: 10px;
+            text-align: left;
+        }
+        
+        /* موبایل */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            .game-container {
+                padding: 10px;
+                border-radius: 15px;
+            }
+            
+            h1 {
+                font-size: 1.5em;
+                margin-bottom: 10px;
+            }
+            
+            .game-info {
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+            
+            #gameCanvas {
+                margin: 10px 0;
+                border-width: 2px;
+            }
+            
+            .controls {
+                gap: 6px;
+                margin: 10px 0;
+            }
+            
+            .control-row {
+                gap: 6px;
+            }
+            
+            button {
+                padding: 10px 12px;
+                font-size: 13px;
+                min-width: 70px;
+                min-height: 40px;
+            }
+            
+            .instructions {
+                font-size: 0.9em;
+                margin: 10px 0;
+            }
+            
+            .debug {
+                font-size: 0.8em;
+            }
+        }
+        
+        /* موبایل کوچک */
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 8px;
+            }
+            
+            h1 {
+                font-size: 1.3em;
+            }
+            
+            .game-info {
+                font-size: 0.9em;
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            button {
+                padding: 8px 10px;
+                font-size: 12px;
+                min-width: 60px;
+                min-height: 36px;
+            }
+            
+            .instructions {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>🏎️ بازی ماشین تحت وب</h1>
+        
+        <div class="game-info">
+            <div class="score">امتیاز: <span id="score">0</span></div>
+            <div class="speed">سرعت: <span id="speed">0</span></div>
+        </div>
+        
+        <div class="status stopped" id="status">بازی متوقف است</div>
+        
+        <canvas id="gameCanvas" width="600" height="800"></canvas>
+        
+        <div class="controls">
+            <div class="control-row">
+                <button class="gas-btn" onclick="carControl('gas')">🚗 گاز</button>
+                <button class="brake-btn" onclick="carControl('brake')">🛑 ترمز</button>
+            </div>
+            
+            <div class="control-row">
+                <button class="lane-btn" onclick="carControl('left')">⬅️ چپ</button>
+                <button class="lane-btn" onclick="carControl('right')">➡️ راست</button>
+            </div>
+            
+            <button class="game-btn" onclick="toggleGame()" id="gameToggle">شروع بازی</button>
+        </div>
+        
+        <div class="instructions">
+            <strong>راهنمای بازی:</strong><br>
+            🚗 گاز: افزایش سرعت (حداکثر 20) | 🛑 ترمز: کاهش سرعت<br>
+            ⬅️➡️ تغییر لاین | 🎯 جمع‌آوری 100 باکس امتیاز:<br>
+            🟨 طلایی (+): 10 امتیاز | 🔴 قرمز (★): 20 امتیاز<br>
+            🟣 بنفش (♦): 15 امتیاز | 🟢 سبز (●): 25 امتیاز<br>
+            🚗 از ماشین‌های دشمن دوری کنید!<br>
+            ⌨️ کنترل: WASD یا کلیدهای جهت‌دار | 📱 موبایل: کشیدن انگشت روی صفحه
+        </div>
+        
+        <div class="debug" id="debug">
+            وضعیت: متوقف | لاین: 1 | موقعیت: 300
+        </div>
+    </div>
+
+    <script>
+        console.log('بازی در حال بارگذاری...');
+        
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // تنظیم Canvas برای موبایل
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            const containerWidth = container.clientWidth - 30; // padding
+            const maxWidth = Math.min(containerWidth, 600);
+            const aspectRatio = 600 / 800;
+            const newHeight = maxWidth / aspectRatio;
+            
+            canvas.style.width = maxWidth + 'px';
+            canvas.style.height = newHeight + 'px';
+        }
+        
+        // تنظیم اولیه
+        resizeCanvas();
+        
+        // تنظیم مجدد هنگام تغییر اندازه پنجره
+        window.addEventListener('resize', resizeCanvas);
+        
+        // متغیرهای بازی
+        let gameState = {
+            carX: 300,
+            carY: 600,
+            carSpeed: 0,
+            carLane: 1,
+            score: 0,
+            gameRunning: false,
+            roadOffset: 0
+        };
+        
+        let scoreBoxes = [];
+        let enemyCars = [];
+        let gameLoopId = null;
+        
+        // تنظیمات ماشین
+        const carSettings = {
+            maxSpeed: 20,
+            acceleration: 0.8,
+            deceleration: 0.5,
+            lanes: [150, 300, 450] // موقعیت مرکز هر لاین برای زمین 600 پیکسلی
+        };
+        
+        console.log('متغیرهای بازی مقداردهی شدند');
+        
+        // ایجاد باکس‌های امتیاز
+        function createScoreBoxes() {
+            scoreBoxes = [];
+            for (let i = 0; i < 100; i++) {
+                const boxTypes = [
+                    { value: 10, size: 15, color: '#f1c40f', symbol: '+' }, // طلایی
+                    { value: 20, size: 18, color: '#e74c3c', symbol: '★' }, // قرمز
+                    { value: 15, size: 16, color: '#9b59b6', symbol: '♦' }, // بنفش
+                    { value: 25, size: 20, color: '#2ecc71', symbol: '●' }  // سبز
+                ];
+                const boxType = boxTypes[Math.floor(Math.random() * boxTypes.length)];
+                
+                scoreBoxes.push({
+                    x: carSettings.lanes[Math.floor(Math.random() * 3)],
+                    y: -200 - (i * 100),
+                    collected: false,
+                    value: boxType.value,
+                    size: boxType.size,
+                    color: boxType.color,
+                    symbol: boxType.symbol
+                });
+            }
+            console.log('باکس‌های امتیاز ایجاد شدند:', scoreBoxes.length);
+        }
+        
+        // ایجاد ماشین‌های دشمن
+        function createEnemyCars() {
+            enemyCars = [];
+            for (let i = 0; i < 3; i++) {
+                enemyCars.push({
+                    x: carSettings.lanes[Math.floor(Math.random() * 3)],
+                    y: -200 - (i * 400),
+                    speed: 3 + Math.random() * 5,
+                    lane: Math.floor(Math.random() * 3),
+                    width: 30,
+                    height: 50
+                });
+            }
+            console.log('ماشین‌های دشمن ایجاد شدند:', enemyCars.length);
+        }
+        
+        // رسم جاده
+        function drawRoad() {
+            ctx.fillStyle = '#34495e';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // خطوط جاده
+            ctx.strokeStyle = '#ecf0f1';
+            ctx.lineWidth = 3;
+            
+            // خط وسط
+            ctx.beginPath();
+            for (let y = gameState.roadOffset % 50; y < canvas.height; y += 50) {
+                ctx.moveTo(canvas.width / 2, y);
+                ctx.lineTo(canvas.width / 2, y + 25);
+            }
+            ctx.stroke();
+            
+            // خطوط کناری
+            ctx.beginPath();
+            ctx.moveTo(100, 0);
+            ctx.lineTo(100, canvas.height);
+            ctx.moveTo(500, 0);
+            ctx.lineTo(500, canvas.height);
+            ctx.stroke();
+        }
+        
+        // رسم ماشین بازیکن
+        function drawPlayerCar() {
+            // بدنه ماشین
+            ctx.fillStyle = '#e74c3c';
+            ctx.fillRect(gameState.carX - 15, gameState.carY - 25, 30, 50);
+            
+            // شیشه جلو
+            ctx.fillStyle = '#3498db';
+            ctx.fillRect(gameState.carX - 10, gameState.carY - 20, 20, 15);
+            
+            // چرخ‌ها
+            ctx.fillStyle = '#2c3e50';
+            ctx.fillRect(gameState.carX - 12, gameState.carY - 30, 6, 8);
+            ctx.fillRect(gameState.carX + 6, gameState.carY - 30, 6, 8);
+            ctx.fillRect(gameState.carX - 12, gameState.carY + 17, 6, 8);
+            ctx.fillRect(gameState.carX + 6, gameState.carY + 17, 6, 8);
+            
+            // چراغ‌ها
+            ctx.fillStyle = '#f1c40f';
+            ctx.fillRect(gameState.carX - 8, gameState.carY - 25, 4, 3);
+            ctx.fillRect(gameState.carX + 4, gameState.carY - 25, 4, 3);
+        }
+        
+        // رسم ماشین‌های دشمن
+        function drawEnemyCars() {
+            enemyCars.forEach(car => {
+                // بدنه ماشین دشمن
+                ctx.fillStyle = '#95a5a6';
+                ctx.fillRect(car.x - 15, car.y - 25, 30, 50);
+                
+                // شیشه جلو
+                ctx.fillStyle = '#7f8c8d';
+                ctx.fillRect(car.x - 10, car.y - 20, 20, 15);
+                
+                // چرخ‌ها
+                ctx.fillStyle = '#2c3e50';
+                ctx.fillRect(car.x - 12, car.y - 30, 6, 8);
+                ctx.fillRect(car.x + 6, car.y - 30, 6, 8);
+                ctx.fillRect(car.x - 12, car.y + 17, 6, 8);
+                ctx.fillRect(car.x + 6, car.y + 17, 6, 8);
+            });
+        }
+        
+        // رسم باکس‌های امتیاز
+        function drawScoreBoxes() {
+            scoreBoxes.forEach(box => {
+                if (!box.collected) {
+                    // باکس رنگی
+                    ctx.fillStyle = box.color;
+                    ctx.fillRect(box.x - box.size/2, box.y - box.size/2, box.size, box.size);
+                    
+                    // حاشیه تیره
+                    ctx.strokeStyle = '#2c3e50';
+                    ctx.lineWidth = 2;
+                    ctx.strokeRect(box.x - box.size/2, box.y - box.size/2, box.size, box.size);
+                    
+                    // نماد امتیاز
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = `${box.size * 0.6}px Arial`;
+                    ctx.textAlign = 'center';
+                    ctx.fillText(box.symbol, box.x, box.y + box.size * 0.2);
+                }
+            });
+        }
+        
+        // رسم بازی
+        function drawGame() {
+            drawRoad();
+            drawScoreBoxes();
+            drawEnemyCars();
+            drawPlayerCar();
+        }
+        
+        // کنترل ماشین
+        function carControl(action) {
+            console.log('کنترل ماشین:', action, 'وضعیت بازی:', gameState.gameRunning);
+            
+            if (!gameState.gameRunning) {
+                alert('ابتدا بازی را شروع کنید!');
+                return;
+            }
+            
+            switch(action) {
+                case 'gas':
+                    gameState.carSpeed = Math.min(carSettings.maxSpeed, gameState.carSpeed + carSettings.acceleration);
+                    console.log('گاز - سرعت جدید:', gameState.carSpeed);
+                    break;
+                case 'brake':
+                    gameState.carSpeed = Math.max(0, gameState.carSpeed - carSettings.deceleration);
+                    console.log('ترمز - سرعت جدید:', gameState.carSpeed);
+                    break;
+                case 'left':
+                    if (gameState.carLane > 0) {
+                        gameState.carLane--;
+                        gameState.carX = carSettings.lanes[gameState.carLane];
+                        console.log('چپ - لاین جدید:', gameState.carLane, 'موقعیت:', gameState.carX);
+                    }
+                    break;
+                case 'right':
+                    if (gameState.carLane < 2) {
+                        gameState.carLane++;
+                        gameState.carX = carSettings.lanes[gameState.carLane];
+                        console.log('راست - لاین جدید:', gameState.carLane, 'موقعیت:', gameState.carX);
+                    }
+                    break;
+            }
+            
+            updateUI();
+            updateDebug();
+        }
+        
+        // به‌روزرسانی بازی
+        function updateGame() {
+            if (!gameState.gameRunning) return;
+            
+            // حرکت جاده
+            gameState.roadOffset += gameState.carSpeed;
+            if (gameState.roadOffset > 50) {
+                gameState.roadOffset = 0;
+            }
+            
+            // حرکت باکس‌های امتیاز
+            scoreBoxes.forEach(box => {
+                if (!box.collected) {
+                    box.y += gameState.carSpeed;
+                    
+                    // اگر باکس از صفحه خارج شد، دوباره در بالا ظاهر شود
+                    if (box.y > canvas.height + 50) {
+                        box.y = -200 - Math.random() * 300; // موقعیت تصادفی در بالا
+                        box.x = carSettings.lanes[Math.floor(Math.random() * 3)];
+                        box.collected = false;
+                        
+                        // گاهی اوقات باکس در لاین‌های کناری ظاهر شود
+                        if (Math.random() < 0.3) {
+                            box.x = 100 + Math.random() * (canvas.width - 200);
+                        }
+                        
+                        // ایجاد باکس جدید با ویژگی‌های تصادفی
+                        const boxTypes = [
+                            { value: 10, size: 15, color: '#f1c40f', symbol: '+' }, // طلایی
+                            { value: 20, size: 18, color: '#e74c3c', symbol: '★' }, // قرمز
+                            { value: 15, size: 16, color: '#9b59b6', symbol: '♦' }, // بنفش
+                            { value: 25, size: 20, color: '#2ecc71', symbol: '●' }  // سبز
+                        ];
+                        const boxType = boxTypes[Math.floor(Math.random() * boxTypes.length)];
+                        
+                        box.value = boxType.value;
+                        box.size = boxType.size;
+                        box.color = boxType.color;
+                        box.symbol = boxType.symbol;
+                    }
+                }
+            });
+            
+            // حرکت ماشین‌های دشمن
+            enemyCars.forEach(car => {
+                car.y += car.speed;
+                
+                // اگر ماشین دشمن از صفحه خارج شد، دوباره در بالا ظاهر شود
+                if (car.y > canvas.height + 50) {
+                    car.y = -200;
+                    car.lane = Math.floor(Math.random() * 3);
+                    car.x = carSettings.lanes[car.lane];
+                    car.speed = 3 + Math.random() * 5;
+                }
+            });
+            
+            // بررسی برخورد با باکس‌های امتیاز
+            scoreBoxes.forEach(box => {
+                if (!box.collected) {
+                    const distance = Math.sqrt(
+                        Math.pow(gameState.carX - box.x, 2) + 
+                        Math.pow(gameState.carY - box.y, 2)
+                    );
+                    
+                    if (distance < 25) {
+                        gameState.score += box.value;
+                        box.collected = true;
+                        console.log('امتیاز! امتیاز جدید:', gameState.score);
+                        updateUI();
+                    }
+                }
+            });
+            
+            // بررسی برخورد با ماشین‌های دشمن
+            enemyCars.forEach(car => {
+                const distance = Math.sqrt(
+                    Math.pow(gameState.carX - car.x, 2) + 
+                    Math.pow(gameState.carY - car.y, 2)
+                );
+                
+                if (distance < 30) {
+                    gameOver();
+                }
+            });
+        }
+        
+        // شروع/توقف بازی
+        function toggleGame() {
+            console.log('تغییر وضعیت بازی از', gameState.gameRunning, 'به', !gameState.gameRunning);
+            
+            gameState.gameRunning = !gameState.gameRunning;
+            
+            if (gameState.gameRunning) {
+                console.log('شروع بازی جدید');
+                // شروع بازی جدید
+                gameState.score = 0;
+                gameState.carSpeed = 0;
+                gameState.carLane = 1;
+                gameState.carX = carSettings.lanes[1];
+                gameState.carY = 600;
+                gameState.roadOffset = 0;
+                
+                createScoreBoxes();
+                createEnemyCars();
+                startGameLoop();
+            } else {
+                console.log('توقف بازی');
+                stopGameLoop();
+            }
+            
+            updateStatus();
+            updateUI();
+            updateDebug();
+        }
+        
+        // شروع حلقه بازی
+        function startGameLoop() {
+            console.log('شروع حلقه بازی');
+            if (gameLoopId) {
+                clearInterval(gameLoopId);
+            }
+            
+            gameLoopId = setInterval(() => {
+                handleContinuousInput();
+                updateGame();
+                drawGame();
+            }, 50); // 20 FPS برای تست
+        }
+        
+        // توقف حلقه بازی
+        function stopGameLoop() {
+            console.log('توقف حلقه بازی');
+            if (gameLoopId) {
+                clearInterval(gameLoopId);
+                gameLoopId = null;
+            }
+        }
+        
+        // پایان بازی
+        function gameOver() {
+            console.log('بازی تمام شد! امتیاز نهایی:', gameState.score);
+            gameState.gameRunning = false;
+            stopGameLoop();
+            
+            alert(`🎮 بازی تمام شد!\nامتیاز نهایی: ${gameState.score}\n\nبرای بازی مجدد دکمه "شروع بازی" را فشار دهید.`);
+            
+            updateStatus();
+            updateDebug();
+        }
+        
+        // به‌روزرسانی رابط کاربری
+        function updateUI() {
+            document.getElementById('score').textContent = gameState.score;
+            document.getElementById('speed').textContent = Math.round(gameState.carSpeed);
+        }
+        
+        // به‌روزرسانی وضعیت
+        function updateStatus() {
+            const statusEl = document.getElementById('status');
+            const toggleBtn = document.getElementById('gameToggle');
+            
+            if (gameState.gameRunning) {
+                statusEl.textContent = 'بازی در حال اجرا است';
+                statusEl.className = 'status running';
+                toggleBtn.textContent = 'توقف بازی';
+            } else {
+                statusEl.textContent = 'بازی متوقف است';
+                statusEl.className = 'status stopped';
+                toggleBtn.textContent = 'شروع بازی';
+            }
+        }
+        
+        // به‌روزرسانی اطلاعات دیباگ
+        function updateDebug() {
+            const debugEl = document.getElementById('debug');
+            debugEl.textContent = `وضعیت: ${gameState.gameRunning ? 'در حال اجرا' : 'متوقف'} | لاین: ${gameState.carLane} | موقعیت: ${gameState.carX} | سرعت: ${Math.round(gameState.carSpeed)}`;
+        }
+        
+        // شروع اولیه
+        console.log('شروع اولیه بازی');
+        updateUI();
+        updateDebug();
+        drawGame();
+        
+        // متغیرهای کنترل کیبورد
+        let keysPressed = {};
+        
+        // کنترل با کیبورد
+        document.addEventListener('keydown', (e) => {
+            console.log('کلید فشرده شد:', e.key);
+            
+            // جلوگیری از اسکرول صفحه
+            if(['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(e.key)) {
+                e.preventDefault();
+            }
+            
+            keysPressed[e.key] = true;
+            
+            if (!gameState.gameRunning) {
+                if (e.key === ' ') {
+                    toggleGame();
+                }
+                return;
+            }
+            
+            // کنترل فوری برای کلیدهای جهت‌دار
+            switch(e.key) {
+                case 'ArrowUp':
+                case 'w':
+                case 'W':
+                    carControl('gas');
+                    break;
+                case 'ArrowDown':
+                case 's':
+                case 'S':
+                    carControl('brake');
+                    break;
+                case 'ArrowLeft':
+                case 'a':
+                case 'A':
+                    carControl('left');
+                    break;
+                case 'ArrowRight':
+                case 'd':
+                case 'D':
+                    carControl('right');
+                    break;
+            }
+        });
+        
+        // رها کردن کلید
+        document.addEventListener('keyup', (e) => {
+            keysPressed[e.key] = false;
+        });
+        
+        // حلقه کنترل مداوم برای کلیدهای نگه داشته شده
+        function handleContinuousInput() {
+            if (!gameState.gameRunning) return;
+            
+            // گاز مداوم
+            if (keysPressed['ArrowUp'] || keysPressed['w'] || keysPressed['W']) {
+                carControl('gas');
+            }
+            
+            // ترمز مداوم
+            if (keysPressed['ArrowDown'] || keysPressed['s'] || keysPressed['S']) {
+                carControl('brake');
+            }
+        }
+        
+        // کنترل لمسی برای موبایل
+        let touchStartX = 0;
+        let touchStartY = 0;
+        
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
+        });
+        
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+        });
+        
+        canvas.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            const touch = e.changedTouches[0];
+            const deltaX = touch.clientX - touchStartX;
+            const deltaY = touch.clientY - touchStartY;
+            
+            if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                // حرکت افقی
+                if (deltaX > 30) {
+                    carControl('right');
+                } else if (deltaX < -30) {
+                    carControl('left');
+                }
+            } else {
+                // حرکت عمودی
+                if (deltaY > 30) {
+                    carControl('brake');
+                } else if (deltaY < -30) {
+                    carControl('gas');
+                }
+            }
+        });
+        
+        console.log('بازی آماده است!');
+    </script>
+</body>
+</html>
