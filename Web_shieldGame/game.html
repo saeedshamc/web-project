@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>🎮 بازی اول ESP32 - نسخه کامل</title>
+    <style>
+        /* متغیرهای CSS برای سفارشی‌سازی آسان */
+        :root {
+            --primary-color: #FF6B6B;
+            --secondary-color: #4ECDC4;
+            --accent-color: #45B7D1;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --info-color: #3498db;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            
+            --border-radius: 20px;
+            --box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+            
+            --font-family: 'Tahoma', sans-serif;
+            --font-size-large: 2.2em;
+            --font-size-medium: 1.2em;
+            --font-size-small: 0.9em;
+        }
+
+        /* استایل‌های اصلی */
+        body {
+            font-family: var(--font-family);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .game-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            max-width: 100%;
+            width: 100%;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        h1 {
+            color: var(--dark-color);
+            margin-bottom: 20px;
+            font-size: var(--font-size-large);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* دکمه راهنما */
+        .help-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(45deg, var(--info-color), #2980b9);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: var(--transition);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .help-btn:hover {
+            background: linear-gradient(45deg, #2980b9, #1f618d);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        /* باکس راهنما */
+        .help-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .help-box {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 90%;
+            max-height: 80%;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .help-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: var(--danger-color);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+
+        .help-close:hover {
+            background: #c0392b;
+            transform: scale(1.1);
+        }
+
+        .help-title {
+            color: var(--dark-color);
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .help-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid var(--info-color);
+        }
+
+        .help-section h3 {
+            color: var(--dark-color);
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .help-section p {
+            color: #666;
+            line-height: 1.6;
+            margin: 5px 0;
+        }
+
+        .help-section ul {
+            color: #666;
+            line-height: 1.6;
+            margin: 10px 0;
+            padding-right: 20px;
+        }
+
+        .help-section li {
+            margin: 5px 0;
+        }
+
+        /* اطلاعات بازی */
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: var(--font-size-medium);
+            font-weight: bold;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .score {
+            color: var(--success-color);
+            background: rgba(39, 174, 96, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .level {
+            color: var(--danger-color);
+            background: rgba(231, 76, 60, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        /* وضعیت بازی */
+        .status {
+            font-size: 1.1em;
+            margin: 15px 0;
+            padding: 12px;
+            border-radius: 15px;
+            font-weight: bold;
+        }
+
+        .status.running {
+            background: linear-gradient(45deg, #d4edda, #c3e6cb);
+            color: #155724;
+            border: 2px solid #28a745;
+        }
+
+        .status.stopped {
+            background: linear-gradient(45deg, #f8d7da, #f5c6cb);
+            color: #721c24;
+            border: 2px solid #dc3545;
+        }
+
+        /* کانوس بازی */
+        #gameCanvas {
+            border: 4px solid var(--dark-color);
+            border-radius: 15px;
+            background: linear-gradient(45deg, #f0f8ff, #e6f3ff);
+            margin: 20px 0;
+            display: block;
+            max-width: 100%;
+            width: 100%;
+            height: auto;
+            box-sizing: border-box;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        /* قدرت‌ها */
+        .power-ups {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .power-up {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid var(--dark-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .power-up.speed {
+            background: var(--warning-color);
+        }
+
+        .power-up.score {
+            background: var(--danger-color);
+        }
+
+        .power-up.shield {
+            background: var(--info-color);
+        }
+
+        /* کنترل‌ها */
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .control-row {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        /* دکمه‌ها */
+        button {
+            background: linear-gradient(45deg, var(--success-color), #45a049);
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: var(--transition);
+            min-width: 80px;
+            min-height: 44px;
+            touch-action: manipulation;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .direction-btn {
+            background: linear-gradient(45deg, var(--info-color), #2980b9);
+        }
+
+        .direction-btn:hover {
+            background: linear-gradient(45deg, #2980b9, #1f618d);
+        }
+
+        .action-btn {
+            background: linear-gradient(45deg, var(--danger-color), #c0392b);
+        }
+
+        .action-btn:hover {
+            background: linear-gradient(45deg, #c0392b, #a93226);
+        }
+
+        .game-btn {
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+            grid-column: 1 / -1;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        .game-btn:hover {
+            background: linear-gradient(45deg, #8e44ad, #7d3c98);
+        }
+
+        /* راهنما */
+        .instructions {
+            font-size: var(--font-size-small);
+            color: #666;
+            margin-top: 15px;
+            line-height: 1.4;
+            background: rgba(102, 102, 102, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        /* ریسپانسیو - موبایل */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            .game-container {
+                padding: 15px;
+                border-radius: 15px;
+            }
+            
+            .help-btn {
+                top: 15px;
+                left: 15px;
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .help-box {
+                padding: 20px;
+                max-width: 95%;
+                max-height: 85%;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 15px;
+            }
+            
+            .game-info {
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+            
+            #gameCanvas {
+                margin: 15px 0;
+                border-width: 3px;
+            }
+            
+            .controls {
+                gap: 8px;
+                margin: 15px 0;
+            }
+            
+            .control-row {
+                gap: 6px;
+            }
+            
+            button {
+                padding: 10px 12px;
+                font-size: 13px;
+                min-width: 70px;
+                min-height: 40px;
+            }
+            
+            .instructions {
+                font-size: 0.9em;
+                margin: 10px 0;
+            }
+        }
+
+        /* ریسپانسیو - موبایل کوچک */
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 10px;
+            }
+            
+            .help-btn {
+                top: 10px;
+                left: 10px;
+                padding: 6px 10px;
+                font-size: 11px;
+            }
+            
+            .help-box {
+                padding: 15px;
+                max-width: 98%;
+                max-height: 90%;
+            }
+            
+            h1 {
+                font-size: 1.5em;
+            }
+            
+            .game-info {
+                font-size: 0.9em;
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            button {
+                padding: 8px 10px;
+                font-size: 12px;
+                min-width: 60px;
+                min-height: 36px;
+            }
+            
+            .instructions {
+                font-size: 0.8em;
+            }
+        }
+
+        /* انیمیشن‌های اضافی */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .power-up.active {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .game-container {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <!-- دکمه راهنما -->
+        <button class="help-btn" onclick="showHelp()">❓ راهنما</button>
+        
+        <h1>🎮 بازی اول ESP32</h1>
+        <h2 style="color: #666; font-size: 1.2em; margin-bottom: 20px;">نسخه کامل و بهبود یافته</h2>
+        
+        <div class="game-info">
+            <div class="score">امتیاز: <span id="score">0</span></div>
+            <div class="level">سطح: <span id="level">1</span></div>
+        </div>
+        
+        <div class="status stopped" id="status">بازی متوقف است</div>
+        
+        <canvas id="gameCanvas" width="500" height="500"></canvas>
+        
+        <div class="power-ups">
+            <div class="power-up speed" title="سرعت">⚡</div>
+            <div class="power-up score" title="امتیاز">⭐</div>
+            <div class="power-up shield" title="محافظت">🛡️</div>
+        </div>
+        
+        <div class="controls">
+            <div class="control-row">
+                <button class="direction-btn" onclick="movePlayer('up')">⬆️ بالا</button>
+            </div>
+            
+            <div class="control-row">
+                <button class="direction-btn" onclick="movePlayer('left')">⬅️ چپ</button>
+                <button class="direction-btn" onclick="movePlayer('right')">➡️ راست</button>
+            </div>
+            
+            <div class="control-row">
+                <button class="direction-btn" onclick="movePlayer('down')">⬇️ پایین</button>
+            </div>
+            
+            <div class="control-row">
+                <button class="action-btn" onclick="collectItem()">🎯 جمع‌آوری</button>
+                <button class="action-btn" onclick="usePowerUp()">⚡ قدرت</button>
+            </div>
+            
+            <button class="game-btn" onclick="toggleGame()" id="gameToggle">شروع بازی</button>
+        </div>
+        
+        <div class="instructions">
+            <strong>راهنمای سریع:</strong><br>
+            🎮 حرکت: دکمه‌های جهت‌دار یا WASD<br>
+            🎯 جمع‌آوری: دکمه جمع‌آوری یا Space<br>
+            ⚡ سپر: 50 امتیاز - 10 ثانیه محافظت<br>
+            🏆 هدف: جمع‌آوری آیتم‌ها و نابودی دشمنان<br>
+            📱 موبایل: کشیدن انگشت روی صفحه برای حرکت
+        </div>
+    </div>
+
+    <!-- باکس راهنما -->
+    <div class="help-overlay" id="helpOverlay">
+        <div class="help-box">
+            <button class="help-close" onclick="hideHelp()">×</button>
+            <h2 class="help-title">📖 راهنمای کامل بازی</h2>
+            
+            <div class="help-section">
+                <h3>🎮 نحوه بازی</h3>
+                <p>هدف اصلی بازی جمع‌آوری آیتم‌های رنگی برای کسب امتیاز است. با افزایش امتیاز، سطح بازی بالا می‌رود و چالش‌های جدیدی ظاهر می‌شوند.</p>
+            </div>
+            
+            <div class="help-section">
+                <h3>🎯 انواع آیتم‌ها</h3>
+                <ul>
+                    <li><strong>⭐ آیتم طلایی:</strong> 10 امتیاز - آیتم پایه</li>
+                    <li><strong>💎 آیتم قرمز:</strong> 20 امتیاز - آیتم باارزش</li>
+                    <li><strong>💜 آیتم بنفش:</strong> 15 امتیاز - آیتم متوسط</li>
+                    <li><strong>💚 آیتم سبز:</strong> 25 امتیاز - آیتم نادر</li>
+                </ul>
+            </div>
+            
+            <div class="help-section">
+                <h3>🎮 کنترل‌ها</h3>
+                <p><strong>دسکتاپ:</strong></p>
+                <ul>
+                    <li>حرکت: کلیدهای جهت‌دار یا WASD</li>
+                    <li>جمع‌آوری: دکمه جمع‌آوری یا Space</li>
+                    <li>قدرت: دکمه قدرت یا کلید P</li>
+                </ul>
+                <p><strong>موبایل:</strong></p>
+                <ul>
+                    <li>حرکت: کشیدن انگشت روی صفحه</li>
+                    <li>عملیات: دکمه‌های روی صفحه</li>
+                </ul>
+            </div>
+            
+            <div class="help-section">
+                <h3>⚡ سیستم قدرت‌ها</h3>
+                <p>با داشتن حداقل 50 امتیاز می‌توانید از قدرت سپر استفاده کنید:</p>
+                <ul>
+                    <li><strong>سپر محافظت:</strong> برای 10 ثانیه فعال می‌شود</li>
+                    <li><strong>تأثیر سپر:</strong> با برخورد به دشمنان، آن‌ها از بین می‌روند و 30 امتیاز اضافه می‌شود</li>
+                    <li><strong>هزینه:</strong> 50 امتیاز</li>
+                </ul>
+                <p>هنگام فعال بودن سپر، دایره آبی دور بازیکن نمایش داده می‌شود.</p>
+            </div>
+            
+            <div class="help-section">
+                <h3>🏆 سیستم سطح</h3>
+                <p>با کسب هر 100 امتیاز، سطح بازی یک درجه بالا می‌رود. از سطح 2 به بعد، دشمنان قرمز رنگ ظاهر می‌شوند که باید از آن‌ها دوری کنید.</p>
+            </div>
+            
+            <div class="help-section">
+                <h3>🎨 ویژگی‌های بصری</h3>
+                <ul>
+                    <li>آیتم‌های پالسی با انیمیشن</li>
+                    <li>ذرات انفجاری هنگام جمع‌آوری</li>
+                    <li>سایه‌ها و عمق بصری</li>
+                    <li>پس‌زمینه متحرک با خطوط شبکه</li>
+                </ul>
+            </div>
+            
+            <div class="help-section">
+                <h3>💡 نکات مهم</h3>
+                <ul>
+                    <li>از دشمنان دوری کنید تا امتیاز از دست ندهید</li>
+                    <li>از قدرت سپر برای نابودی دشمنان و کسب امتیاز استفاده کنید</li>
+                    <li>آیتم‌های سبز نادرتر و باارزش‌تر هستند</li>
+                    <li>با سپر فعال، دشمنان را نابود کنید و 30 امتیاز کسب کنید</li>
+                    <li>بازی در تمام دستگاه‌ها قابل اجرا است</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // بازی اول ESP32 - نسخه بهبود یافته
+        // فایل JavaScript جداگانه برای منطق بازی
+
+        class ESP32Game {
+            constructor() {
+                this.canvas = document.getElementById('gameCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                
+                this.gameState = {
+                    playerX: 250,
+                    playerY: 250,
+                    score: 0,
+                    level: 1,
+                    gameRunning: false,
+                    playerSpeed: 5,
+                    powerUps: {
+                        speed: 0,
+                        score: 0,
+                        shield: 0
+                    }
+                };
+                
+                this.items = [];
+                this.enemies = [];
+                this.particles = [];
+                this.gameLoopId = null;
+                this.itemSpawnTimer = 0;
+                this.enemySpawnTimer = 0;
+                this.keysPressed = {};
+                
+                this.init();
+            }
+            
+            init() {
+                this.resizeCanvas();
+                this.setupEventListeners();
+                this.updateUI();
+                this.updateStatus();
+                this.drawGame();
+                
+                window.addEventListener('resize', () => this.resizeCanvas());
+            }
+            
+            resizeCanvas() {
+                const container = this.canvas.parentElement;
+                const containerWidth = container.clientWidth - 40;
+                const maxWidth = Math.min(containerWidth, 500);
+                const aspectRatio = 500 / 500;
+                const newHeight = maxWidth / aspectRatio;
+                
+                this.canvas.style.width = maxWidth + 'px';
+                this.canvas.style.height = newHeight + 'px';
+            }
+            
+            setupEventListeners() {
+                // کیبورد
+                document.addEventListener('keydown', (e) => this.handleKeyDown(e));
+                document.addEventListener('keyup', (e) => this.handleKeyUp(e));
+                
+                // لمسی
+                this.canvas.addEventListener('touchstart', (e) => this.handleTouchStart(e));
+                this.canvas.addEventListener('touchmove', (e) => this.handleTouchMove(e));
+                this.canvas.addEventListener('touchend', (e) => this.handleTouchEnd(e));
+                
+                // کنترل مداوم
+                setInterval(() => this.handleContinuousInput(), 50);
+            }
+            
+            handleKeyDown(e) {
+                if(['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(e.key)) {
+                    e.preventDefault();
+                }
+                
+                this.keysPressed[e.key] = true;
+                
+                if (!this.gameState.gameRunning) {
+                    if (e.key === ' ') {
+                        this.toggleGame();
+                    }
+                    return;
+                }
+                
+                switch(e.key) {
+                    case 'ArrowUp':
+                    case 'w':
+                    case 'W':
+                        this.movePlayer('up');
+                        break;
+                    case 'ArrowDown':
+                    case 's':
+                    case 'S':
+                        this.movePlayer('down');
+                        break;
+                    case 'ArrowLeft':
+                    case 'a':
+                    case 'A':
+                        this.movePlayer('left');
+                        break;
+                    case 'ArrowRight':
+                    case 'd':
+                    case 'D':
+                        this.movePlayer('right');
+                        break;
+                    case ' ':
+                        this.collectItem();
+                        break;
+                    case 'p':
+                    case 'P':
+                        this.usePowerUp();
+                        break;
+                }
+            }
+            
+            handleKeyUp(e) {
+                this.keysPressed[e.key] = false;
+            }
+            
+            handleContinuousInput() {
+                if (this.gameState.gameRunning) {
+                    if (this.keysPressed['ArrowUp'] || this.keysPressed['w'] || this.keysPressed['W']) {
+                        this.movePlayer('up');
+                    }
+                    if (this.keysPressed['ArrowDown'] || this.keysPressed['s'] || this.keysPressed['S']) {
+                        this.movePlayer('down');
+                    }
+                    if (this.keysPressed['ArrowLeft'] || this.keysPressed['a'] || this.keysPressed['A']) {
+                        this.movePlayer('left');
+                    }
+                    if (this.keysPressed['ArrowRight'] || this.keysPressed['d'] || this.keysPressed['D']) {
+                        this.movePlayer('right');
+                    }
+                }
+            }
+            
+            handleTouchStart(e) {
+                e.preventDefault();
+                const touch = e.touches[0];
+                this.touchStartX = touch.clientX;
+                this.touchStartY = touch.clientY;
+            }
+            
+            handleTouchMove(e) {
+                e.preventDefault();
+            }
+            
+            handleTouchEnd(e) {
+                e.preventDefault();
+                const touch = e.changedTouches[0];
+                const deltaX = touch.clientX - this.touchStartX;
+                const deltaY = touch.clientY - this.touchStartY;
+                
+                if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                    if (deltaX > 30) {
+                        this.movePlayer('right');
+                    } else if (deltaX < -30) {
+                        this.movePlayer('left');
+                    }
+                } else {
+                    if (deltaY > 30) {
+                        this.movePlayer('down');
+                    } else if (deltaY < -30) {
+                        this.movePlayer('up');
+                    }
+                }
+            }
+            
+            createItem() {
+                if (this.gameState.gameRunning) {
+                    const itemTypes = [
+                        { color: '#f39c12', value: 10, symbol: '⭐' },
+                        { color: '#e74c3c', value: 20, symbol: '💎' },
+                        { color: '#9b59b6', value: 15, symbol: '💜' },
+                        { color: '#2ecc71', value: 25, symbol: '💚' }
+                    ];
+                    
+                    const itemType = itemTypes[Math.floor(Math.random() * itemTypes.length)];
+                    
+                    this.items.push({
+                        x: Math.random() * (this.canvas.width - 30),
+                        y: Math.random() * (this.canvas.height - 30),
+                        size: 20,
+                        color: itemType.color,
+                        value: itemType.value,
+                        symbol: itemType.symbol,
+                        pulse: 0
+                    });
+                }
+            }
+            
+            createEnemy() {
+                if (this.gameState.gameRunning && this.gameState.level > 1) {
+                    this.enemies.push({
+                        x: Math.random() * (this.canvas.width - 25),
+                        y: Math.random() * (this.canvas.height - 25),
+                        size: 25,
+                        speed: 1 + Math.random() * 2,
+                        direction: Math.random() * Math.PI * 2,
+                        color: '#e74c3c'
+                    });
+                }
+            }
+            
+            createParticles(x, y, color) {
+                for (let i = 0; i < 10; i++) {
+                    this.particles.push({
+                        x: x,
+                        y: y,
+                        vx: (Math.random() - 0.5) * 10,
+                        vy: (Math.random() - 0.5) * 10,
+                        life: 30,
+                        color: color
+                    });
+                }
+            }
+            
+            drawGame() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                this.drawBackground();
+                this.drawItems();
+                this.drawEnemies();
+                this.drawPlayer();
+                this.drawParticles();
+                
+                this.checkCollisions();
+            }
+            
+            drawBackground() {
+                const gradient = this.ctx.createLinearGradient(0, 0, this.canvas.width, this.canvas.height);
+                gradient.addColorStop(0, '#f0f8ff');
+                gradient.addColorStop(1, '#e6f3ff');
+                this.ctx.fillStyle = gradient;
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                // خطوط شبکه
+                this.ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+                this.ctx.lineWidth = 1;
+                for (let x = 0; x < this.canvas.width; x += 50) {
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(x, 0);
+                    this.ctx.lineTo(x, this.canvas.height);
+                    this.ctx.stroke();
+                }
+                for (let y = 0; y < this.canvas.height; y += 50) {
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(0, y);
+                    this.ctx.lineTo(this.canvas.width, y);
+                    this.ctx.stroke();
+                }
+            }
+            
+            drawItems() {
+                this.items.forEach(item => {
+                    item.pulse += 0.1;
+                    const pulseSize = item.size + Math.sin(item.pulse) * 3;
+                    
+                    this.ctx.fillStyle = item.color;
+                    this.ctx.beginPath();
+                    this.ctx.arc(item.x + item.size/2, item.y + item.size/2, pulseSize/2, 0, 2 * Math.PI);
+                    this.ctx.fill();
+                    
+                    this.ctx.strokeStyle = '#333';
+                    this.ctx.lineWidth = 2;
+                    this.ctx.stroke();
+                    
+                    this.ctx.fillStyle = '#fff';
+                    this.ctx.font = '12px Arial';
+                    this.ctx.textAlign = 'center';
+                    this.ctx.fillText(item.symbol, item.x + item.size/2, item.y + item.size/2 + 4);
+                });
+            }
+            
+            drawEnemies() {
+                this.enemies.forEach(enemy => {
+                    this.ctx.fillStyle = enemy.color;
+                    this.ctx.fillRect(enemy.x, enemy.y, enemy.size, enemy.size);
+                    
+                    this.ctx.fillStyle = '#fff';
+                    this.ctx.fillRect(enemy.x + 5, enemy.y + 5, 3, 3);
+                    this.ctx.fillRect(enemy.x + 17, enemy.y + 5, 3, 3);
+                    this.ctx.fillRect(enemy.x + 8, enemy.y + 15, 9, 2);
+                });
+            }
+            
+            drawPlayer() {
+                const playerSize = 30;
+                
+                // سایه
+                this.ctx.fillStyle = 'rgba(0,0,0,0.2)';
+                this.ctx.fillRect(this.gameState.playerX + 3, this.gameState.playerY + 3, playerSize, playerSize);
+                
+                // بدنه بازیکن
+                this.ctx.fillStyle = '#FF6B6B';
+                this.ctx.fillRect(this.gameState.playerX, this.gameState.playerY, playerSize, playerSize);
+                
+                // حاشیه
+                this.ctx.strokeStyle = '#333';
+                this.ctx.lineWidth = 2;
+                this.ctx.strokeRect(this.gameState.playerX, this.gameState.playerY, playerSize, playerSize);
+                
+                // چهره بازیکن
+                this.ctx.fillStyle = '#333';
+                this.ctx.fillRect(this.gameState.playerX + 8, this.gameState.playerY + 8, 4, 4);
+                this.ctx.fillRect(this.gameState.playerX + 18, this.gameState.playerY + 8, 4, 4);
+                this.ctx.fillRect(this.gameState.playerX + 10, this.gameState.playerY + 18, 10, 2);
+                
+                // محافظت
+                if (this.gameState.powerUps.shield > 0) {
+                    this.ctx.strokeStyle = '#3498db';
+                    this.ctx.lineWidth = 3;
+                    this.ctx.beginPath();
+                    this.ctx.arc(this.gameState.playerX + playerSize/2, this.gameState.playerY + playerSize/2, playerSize/2 + 5, 0, 2 * Math.PI);
+                    this.ctx.stroke();
+                }
+            }
+            
+            drawParticles() {
+                this.particles = this.particles.filter(particle => {
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+                    particle.life--;
+                    
+                    if (particle.life > 0) {
+                        this.ctx.fillStyle = particle.color;
+                        this.ctx.globalAlpha = particle.life / 30;
+                        this.ctx.fillRect(particle.x, particle.y, 3, 3);
+                        this.ctx.globalAlpha = 1;
+                        return true;
+                    }
+                    return false;
+                });
+            }
+            
+            checkCollisions() {
+                // برخورد با آیتم‌ها
+                this.items = this.items.filter(item => {
+                    const distance = Math.sqrt(
+                        Math.pow(this.gameState.playerX + 15 - (item.x + item.size/2), 2) +
+                        Math.pow(this.gameState.playerY + 15 - (item.y + item.size/2), 2)
+                    );
+                    
+                    if (distance < 25) {
+                        this.gameState.score += item.value;
+                        this.createParticles(item.x + item.size/2, item.y + item.size/2, item.color);
+                        this.updateUI();
+                        return false;
+                    }
+                    return true;
+                });
+                
+                // برخورد با دشمنان
+                this.enemies = this.enemies.filter(enemy => {
+                    const distance = Math.sqrt(
+                        Math.pow(this.gameState.playerX + 15 - (enemy.x + enemy.size/2), 2) +
+                        Math.pow(this.gameState.playerY + 15 - (enemy.y + enemy.size/2), 2)
+                    );
+                    
+                    if (distance < 25) {
+                        if (this.gameState.powerUps.shield > 0) {
+                            // اگر سپر فعال است، دشمن از بین می‌رود و امتیاز اضافه می‌شود
+                            this.gameState.score += 30;
+                            this.createParticles(enemy.x + enemy.size/2, enemy.y + enemy.size/2, '#00ff00');
+                            this.updateUI();
+                            return false; // حذف دشمن
+                        } else {
+                            // اگر سپر فعال نیست، امتیاز کم می‌شود
+                            this.gameState.score = Math.max(0, this.gameState.score - 50);
+                            this.createParticles(enemy.x + enemy.size/2, enemy.y + enemy.size/2, '#e74c3c');
+                            this.updateUI();
+                            return false; // حذف دشمن
+                        }
+                    }
+                    return true;
+                });
+            }
+            
+            movePlayer(direction) {
+                if (!this.gameState.gameRunning) return;
+                
+                const speed = this.gameState.playerSpeed + (this.gameState.powerUps.speed > 0 ? 3 : 0);
+                
+                switch(direction) {
+                    case 'up':
+                        this.gameState.playerY = Math.max(0, this.gameState.playerY - speed);
+                        break;
+                    case 'down':
+                        this.gameState.playerY = Math.min(this.canvas.height - 30, this.gameState.playerY + speed);
+                        break;
+                    case 'left':
+                        this.gameState.playerX = Math.max(0, this.gameState.playerX - speed);
+                        break;
+                    case 'right':
+                        this.gameState.playerX = Math.min(this.canvas.width - 30, this.gameState.playerX + speed);
+                        break;
+                }
+            }
+            
+            collectItem() {
+                if (this.gameState.gameRunning) {
+                    this.createItem();
+                    this.gameState.score += 5;
+                    this.updateUI();
+                }
+            }
+            
+            usePowerUp() {
+                if (this.gameState.gameRunning && this.gameState.score >= 50) {
+                    // فقط سپر محافظت برای 10 ثانیه (600 فریم)
+                    this.gameState.powerUps.shield = 600;
+                    this.gameState.score -= 50;
+                    this.updateUI();
+                }
+            }
+            
+            toggleGame() {
+                this.gameState.gameRunning = !this.gameState.gameRunning;
+                
+                if (this.gameState.gameRunning) {
+                    this.gameState.score = 0;
+                    this.gameState.level = 1;
+                    this.gameState.playerX = 250;
+                    this.gameState.playerY = 250;
+                    this.gameState.powerUps = { speed: 0, score: 0, shield: 0 };
+                    this.items = [];
+                    this.enemies = [];
+                    this.particles = [];
+                    this.startGameLoop();
+                } else {
+                    this.stopGameLoop();
+                }
+                
+                this.updateStatus();
+            }
+            
+            startGameLoop() {
+                if (this.gameLoopId) clearInterval(this.gameLoopId);
+                
+                this.gameLoopId = setInterval(() => {
+                    if (this.gameState.gameRunning) {
+                        // کاهش قدرت‌ها
+                        if (this.gameState.powerUps.speed > 0) this.gameState.powerUps.speed--;
+                        if (this.gameState.powerUps.shield > 0) this.gameState.powerUps.shield--;
+                        
+                        // ایجاد آیتم‌ها
+                        this.itemSpawnTimer++;
+                        if (this.itemSpawnTimer >= 60) {
+                            this.createItem();
+                            this.itemSpawnTimer = 0;
+                        }
+                        
+                        // ایجاد دشمنان
+                        if (this.gameState.level > 1) {
+                            this.enemySpawnTimer++;
+                            if (this.enemySpawnTimer >= 120) {
+                                this.createEnemy();
+                                this.enemySpawnTimer = 0;
+                            }
+                        }
+                        
+                        // حرکت دشمنان
+                        this.enemies.forEach(enemy => {
+                            enemy.x += Math.cos(enemy.direction) * enemy.speed;
+                            enemy.y += Math.sin(enemy.direction) * enemy.speed;
+                            
+                            if (enemy.x < 0 || enemy.x > this.canvas.width - enemy.size) {
+                                enemy.direction = Math.PI - enemy.direction;
+                            }
+                            if (enemy.y < 0 || enemy.y > this.canvas.height - enemy.size) {
+                                enemy.direction = -enemy.direction;
+                            }
+                        });
+                        
+                        // افزایش سطح
+                        const newLevel = Math.floor(this.gameState.score / 100) + 1;
+                        if (newLevel > this.gameState.level) {
+                            this.gameState.level = newLevel;
+                            this.updateUI();
+                        }
+                    }
+                    
+                    this.drawGame();
+                }, 1000/60);
+            }
+            
+            stopGameLoop() {
+                if (this.gameLoopId) {
+                    clearInterval(this.gameLoopId);
+                    this.gameLoopId = null;
+                }
+            }
+            
+            updateUI() {
+                document.getElementById('score').textContent = this.gameState.score;
+                document.getElementById('level').textContent = this.gameState.level;
+            }
+            
+            updateStatus() {
+                const statusEl = document.getElementById('status');
+                const toggleBtn = document.getElementById('gameToggle');
+                
+                if (this.gameState.gameRunning) {
+                    statusEl.textContent = `بازی در حال اجرا است - سطح ${this.gameState.level}`;
+                    statusEl.className = 'status running';
+                    toggleBtn.textContent = 'توقف بازی';
+                } else {
+                    statusEl.textContent = 'بازی متوقف است';
+                    statusEl.className = 'status stopped';
+                    toggleBtn.textContent = 'شروع بازی';
+                }
+            }
+        }
+
+        // توابع راهنما
+        function showHelp() {
+            document.getElementById('helpOverlay').style.display = 'flex';
+        }
+
+        function hideHelp() {
+            document.getElementById('helpOverlay').style.display = 'none';
+        }
+
+        // بستن راهنما با کلیک روی پس‌زمینه
+        document.getElementById('helpOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideHelp();
+            }
+        });
+
+        // شروع بازی
+        let game;
+        document.addEventListener('DOMContentLoaded', () => {
+            game = new ESP32Game();
+        });
+
+        // توابع سراسری برای دکمه‌ها
+        function movePlayer(direction) {
+            game.movePlayer(direction);
+        }
+
+        function collectItem() {
+            game.collectItem();
+        }
+
+        function usePowerUp() {
+            game.usePowerUp();
+        }
+
+        function toggleGame() {
+            game.toggleGame();
+        }
+    </script>
+</body>
+</html>
